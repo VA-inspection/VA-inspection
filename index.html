@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#1E2A59">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -365,9 +365,60 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
   .rpt{border:0;border-radius:0;padding:0;overflow:visible}
   @page{size:A4;margin:14mm 12mm}
 }
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+@media (max-width:899px){
+ input:not([type=checkbox]):not([type=radio]),select,textarea{font-size:16px !important;}
+ input[type=checkbox],input[type=radio]{width:20px;height:20px;}
+}
+
+/* ===== v20 상업적 폴리시 ===== */
+#splash{position:fixed;inset:0;z-index:400;background:linear-gradient(160deg,#1E2A59,#141C3D 58%,#0B1023);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;transition:opacity .45s ease,visibility .45s}
+#splash.off{opacity:0;visibility:hidden;pointer-events:none}
+#splash .spLogo{height:32px;width:auto;max-width:70%;animation:spIn .75s cubic-bezier(.2,.8,.2,1) both}
+#splash .spName{color:#fff;font-size:16.5px;font-weight:900;letter-spacing:-.02em;animation:spIn .75s .09s cubic-bezier(.2,.8,.2,1) both}
+#splash .spSub{color:rgba(255,255,255,.48);font-size:9.5px;font-weight:800;letter-spacing:.22em;font-family:var(--fd);font-style:italic}
+#splash .spBar{width:128px;height:3px;border-radius:99px;background:rgba(255,255,255,.15);overflow:hidden;margin-top:9px}
+#splash .spBar i{display:block;height:100%;width:42%;border-radius:99px;background:linear-gradient(90deg,var(--mint),var(--pink));animation:spBar 1.15s ease-in-out infinite}
+@keyframes spIn{from{opacity:0;transform:translateY(11px)}to{opacity:1;transform:none}}
+@keyframes spBar{0%{transform:translateX(-115%)}100%{transform:translateX(340%)}}
+.v20acc{margin-left:auto;flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card);border-radius:99px;padding:5px 11px;font-family:inherit;font-size:11.5px;font-weight:800;color:var(--ink);max-width:56%}
+.v20acc span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.v20acc i{font-style:normal;color:var(--gray2);font-weight:700;font-size:10.5px}
+.lgkeep{display:flex;align-items:flex-start;gap:9px;margin:12px 0 2px;font-size:12px;color:var(--gray);line-height:1.45}
+.lgkeep input{width:18px;height:18px;margin:1px 0 0;flex:0 0 auto}
+#v20BrandCard{margin-top:12px}
+.v20ttl{font-weight:900;font-size:14px;margin-bottom:7px}
+.v20tag{font-size:10px;font-weight:800;color:var(--pink);background:var(--pink-t);border-radius:99px;padding:3px 8px;margin-left:6px}
+.v20hint{font-size:11.5px;color:var(--gray);line-height:1.55;margin-bottom:11px}
+.v20brandrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.v20prev{height:32px;width:auto;max-width:140px;object-fit:contain;background:var(--line2);border-radius:8px;padding:4px}
+.v20in{flex:1 1 130px;min-width:0;border:1px solid var(--line);border-radius:10px;padding:10px 11px;font-family:inherit;font-size:14px;background:var(--card);color:var(--ink)}
+.v20row2{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.v20btn{border:1px solid var(--navy);background:var(--navy);color:#fff;border-radius:10px;padding:10px 13px;font-family:inherit;font-size:12px;font-weight:800;display:inline-block}
+.v20btn.ghost{background:var(--card);color:var(--ink);border-color:var(--line)}
+.v20who{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.v20who b{font-size:14.5px;font-weight:900}
+.v20who span{font-size:10.5px;font-weight:800;color:var(--gray);background:var(--line2);border-radius:99px;padding:3px 8px}
+#onb{position:fixed;inset:0;z-index:300;background:rgba(19,24,31,.72);display:flex;align-items:flex-end;justify-content:center}
+#onb .obbox{background:var(--card);width:100%;max-width:430px;border-radius:20px 20px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom));animation:obUp .32s cubic-bezier(.2,.8,.2,1) both}
+@keyframes obUp{from{transform:translateY(34px);opacity:0}to{transform:none;opacity:1}}
+#onb .obn{font-family:var(--fd);font-style:italic;font-weight:900;color:var(--pink);font-size:12.5px;letter-spacing:.08em}
+#onb h3{margin:7px 0 9px;font-size:19px;font-weight:900;letter-spacing:-.02em;color:var(--ink)}
+#onb p{margin:0 0 17px;font-size:13.5px;color:var(--gray);line-height:1.62}
+#onb .obdots{display:flex;gap:5px;margin-bottom:14px}
+#onb .obdots i{width:6px;height:6px;border-radius:99px;background:var(--line);display:block;transition:all .2s}
+#onb .obdots i.on{background:var(--navy);width:19px}
+#onb .obgo{width:100%;border:0;background:var(--navy);color:#fff;border-radius:12px;padding:14px;font-family:inherit;font-size:14px;font-weight:900}
+#onb .obskip{width:100%;border:0;background:transparent;color:var(--gray2);font-family:inherit;font-size:12px;font-weight:700;padding:11px;margin-top:2px}
+#modalRoot > *{animation:mIn .22s cubic-bezier(.2,.8,.2,1) both}
+@keyframes mIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+.card button:active,.tile:active,.lgtile:active,.v20btn:active{transform:scale(.982)}
+@media (prefers-reduced-motion:reduce){#splash *,#onb *,#modalRoot > *{animation:none!important}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
 </head>
 <body>
+<div id="splash"><img class="spLogo" id="spLogo" alt=""><div class="spName">모험시설 안전점검</div><div class="spSub">SAFETY INSPECTION SYSTEM</div><div class="spBar"><i></i></div></div>
 <div class="wrap">
   <div class="topbg">
     <div class="appbar">
@@ -485,7 +536,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
     <div id="pinGate">
       <div class="sechead"><h2>관리자 화면</h2><span class="hint">항목·센터 편집</span></div>
       <div class="card pinbox">
-        <p class="lb">관리자 PIN을 입력하세요 (기본 0000)</p>
+        <p class="lb">관리자 PIN을 입력하세요</p>
         <input type="password" id="pinInput" inputmode="numeric" maxlength="6" placeholder="••••">
         <p class="note" style="margin-top:12px;text-align:left">이 잠금은 <b>실수로 양식을 건드리는 것을 막는 장치</b>입니다. 기기 자체의 보안이 필요하면 폰 잠금을 사용하세요. 서버 버전에서는 계정 권한으로 분리됩니다.</p>
         <div class="btnrow" style="margin-top:12px"><button class="btn" id="btnPin">열기</button></div>
@@ -586,7 +637,7 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
     <div id="lgBody"></div>
     <div class="fld" id="lgPinRow" style="border-bottom:0;display:none"><label>PIN</label><div class="ctl"><input type="password" id="lgPin" inputmode="numeric" maxlength="6" placeholder="••••"></div></div>
     <div class="btnrow" style="margin-top:8px"><button class="btn ghost" id="lgBack" style="flex:0 0 30%">←</button><button class="btn" id="lgGo" style="flex:1">다음</button></div>
-    <p class="note" id="lgHint" style="margin-top:10px">PIN 예시 — 모험시설 관리자 1111 · 어드벤처 인사이트 2222 · 현장 3333</p>
+    <p class="note" id="lgHint" style="margin-top:10px"></p>
   </div>
 </div>
 <div class="dock">
@@ -994,7 +1045,7 @@ let CHECKS=jget(LSM5,null)||buildDefaultChecks();
 if(!CHECKS.full)CHECKS=buildDefaultChecks();
 (['daily','weekly','monthly','ext','abw','edge','edgeM','ai_line'].concat(Object.keys(buildAI()))).forEach(k=>{if(!CHECKS[k])CHECKS[k]=buildDefaultChecks()[k]});
 Object.keys(CHECKS).forEach(k=>{if(!CHECKS[k]||!CHECKS[k].sections)delete CHECKS[k]});
-let CURRENT=jget(LSU,null), lgPick=null, lgFilter='all', lgQuery='';
+let CURRENT=(function(){try{var c=jget(LSU,null);return (c&&c._keep)?c:null}catch(e){return null}})(), lgPick=null, lgFilter='all', lgQuery='';
 const activeUser=()=>CURRENT||null;
 const role=()=>{const u=activeUser();return ROLES.find(r=>r.id===(u&&u.role))||ROLES[1]};
 function canSee(r){const u=activeUser();if(!u)return true;const R=role();
@@ -1140,9 +1191,9 @@ function progress(){let done=0,w=0,s=0,pic=0;
  ITEMS().forEach(i=>{const it=cur.items[i.code];if(it.v){done++;if(it.v==='watch')w++;if(it.v==='stop')s++}pic+=(it.photos||[]).length});
  cur.extras.forEach(e=>pic+=(e.photos||[]).length);
  return{done,w,s,pic}}
-function renderHeader(){
+function renderHeader(){try{if(typeof v20Account==='function')setTimeout(v20Account,0)}catch(e){}
  if(typeof v11EnsureItems==='function')v11EnsureItems();
- document.getElementById('barLogo').src=LOGO.pink;
+ document.getElementById('barLogo').src=brandLogo('pink');
  document.getElementById('abCenter').textContent=cur.center||'센터 미선택';
  document.getElementById('abDate').textContent=fmDate(cur.date);
  document.getElementById('metaState').textContent=RECS.some(r=>r.id===cur.id)?'저장됨':'작성 중';
@@ -1570,7 +1621,7 @@ function photoBlocks(r){
  return out}
 function reportInner(r){
  const m=sum(r),blocks=photoBlocks(r);
- let h=`<img class="rlogo" src="${LOGO.blue}" alt="(주)바운스"><div class="rt">모험시설 분기점검 결과서</div><div class="rtrule"></div>`;
+ let h=`<img class="rlogo" src="${brandLogo('blue')}" alt="(주)바운스"><div class="rt">모험시설 분기점검 결과서</div><div class="rtrule"></div>`;
  h+=`<table><colgroup><col style="width:16%"><col style="width:34%"><col style="width:16%"><col style="width:34%"></colgroup>
   <tr><td class="hdr">점검일자</td><td class="c">${fmDate(r.date)}</td><td class="hdr">점검센터</td><td class="c">${esc(r.center||'')}</td></tr>
   <tr><td class="hdr">점검시설</td><td class="c">${esc(r.facilities.join(', '))}</td><td class="hdr">점검자</td><td class="c">${esc(r.inspector||'')}</td></tr></table>`;
@@ -1763,14 +1814,14 @@ function renderAdmin(){
   <div class="kv"><span class="k"><b>점검 데이터 구조</b><em>점검자·수정자·개정번호 기록 (다인 병합 대비)</em></span></div>`}
 function saveMaster(){jset(LSM,MASTER);CHECKS.full={name:'표준 분기점검',sections:MASTER.sections};jset(LSM5,CHECKS);
  ITEMS().forEach(i=>{if(!cur.items[i.code])cur.items[i.code]={v:null,num:'',note:'',photos:[]}});}
-function renderAdminAll(){renderAdmin();renderCheck()}
+function renderAdminAll(){renderAdmin();renderCheck();try{if(typeof v20BrandMount==='function')v20BrandMount()}catch(e){}}
 
 /* ---------- 사용자 · 역할 ---------- */
 /* __LOGIN_V9__ */
 /* ============================================================
    v9 — 로그인 단계식(심플) · 센터별 시설 관리
    ============================================================ */
-let lgStep=1, lgRole=null, facAdminCenter=null;
+let lgStep=1, lgRole=null, facAdminCenter=null, lgShowAll=false;
 function renderLogin(){
  const body=document.getElementById('lgBody'); if(!body)return;
  const steps=document.getElementById('lgSteps'), pinRow=document.getElementById('lgPinRow'),
@@ -1780,19 +1831,28 @@ function renderLogin(){
  if(steps)steps.innerHTML=['역할','담당','PIN'].map((t,i)=>
    '<span class="'+(lgStep>=i+1?'on':'')+'"><b>'+(i+1)+'</b>'+t+'</span>').join('');
  if(pinRow)pinRow.style.display=(lgStep===3)?'':'none';
+ if(typeof v20KeepRow==='function')v20KeepRow();
  if(back){back.style.display=(lgStep>1)?'':'none';back.onclick=()=>{lgStep=(lgStep===3?(rolUsers(lgRole).length===1?1:2):1);renderLogin()}}
  if(gob){gob.style.display=(lgStep===1)?'none':'';gob.textContent=(lgStep===3)?'시작':'다음';
   gob.onclick=()=>{ if(lgStep<3)lgNext(); else doLogin() }}
  body.innerHTML='';
  if(lgStep===1){
-  body.innerHTML='<div class="lgtiles">'+ROLES.map(r=>{
+  const _lastRole=(function(){try{const id=localStorage.getItem('vx_last_user');const u=(SET.users||[]).filter(function(x){return x.id===id})[0];return u?u.role:''}catch(e){return ''}})();
+  if(_lastRole==='int'||_lastRole==='ext')lgShowAll=true;
+  const _nSite=rolUsers('site').length;
+  const _all=lgShowAll||!_nSite;
+  body.innerHTML='<div class="lgtiles">'+ROLES.filter(function(r){return _all||r.id==='site'}).map(r=>{
    const n=rolUsers(r.id).length; if(!n)return '';
    const desc = r.id==='ext' ? '바운스 외 현장 포함 · 전문 점검'
              : r.id==='int' ? '전체 센터 · 양식·시설 관리'
              : '담당 매장 · 일일 / 월간 점검';
    return '<button type="button" class="lgtile '+r.id+'" data-role="'+r.id+'">'
     +'<span class="lgname">'+esc(r.short)+'</span><span class="lgdesc">'+esc(desc)+'</span>'
-    +'<span class="lgn">'+n+'명</span></button>'}).join('')+'</div>';
+    +'<span class="lgn">'+n+'명</span></button>'}).join('')
+    +(_all?'':'<button type="button" class="lgmorelink" id="lgMore">관리자 · 외부 전문가 로그인</button>')
+    +'</div>';
+  const _more=document.getElementById('lgMore');
+  if(_more)_more.onclick=()=>{lgShowAll=true;renderLogin()};
   body.querySelectorAll('.lgtile').forEach(b=>b.onclick=()=>{
    lgRole=b.dataset.role; const list=rolUsers(lgRole);
    if(list.length===1){lgPick=list[0].id;lgStep=3}else{if(!list.some(u=>u.id===lgPick))lgPick=list[0].id;lgStep=2}
@@ -1923,7 +1983,7 @@ function doLogin(){
  const u=SET.users.find(x=>x.id===lgPick);if(!u)return toast('사용자를 선택하세요');
  const pin=(document.getElementById('lgPin').value||'').trim();
  if(pin!==(u.pin||'1111'))return toast('PIN이 맞지 않습니다');
- CURRENT=u;jset(LSU,CURRENT);try{localStorage.setItem('vx_last_user',u.id)}catch(e){};lgStep=1;
+ CURRENT=u;try{var _kp=(typeof lgKeep!=='undefined'&&!!lgKeep);CURRENT._keep=_kp;localStorage.setItem('vx_user_v5',JSON.stringify(CURRENT));if(_kp)localStorage.setItem('vx_last_user',CURRENT.id);else localStorage.removeItem('vx_last_user')}catch(e){};jset(LSU,CURRENT);try{localStorage.setItem('vx_last_user',u.id)}catch(e){};lgStep=1;
  document.getElementById('lgate').classList.add('hide');
  cur=newRec();document.getElementById('fDate').value=cur.date;
  document.getElementById('fInsp').value=cur.inspector;
@@ -2294,7 +2354,7 @@ function renderActions(){
     const ph=(a.after||[]);
     h+='<div class="v12ph">'
       + ph.map(function(p,i){return '<span class="v12pt"><img src="'+p.data+'" alt=""><button type="button" data-del="'+i+'">×</button></span>'}).join('')
-      +'<label class="v12cam">＋ 조치 후 사진<input type="file" accept="image/*" capture="environment" multiple class="hide" data-add="1"></label></div>';
+      +'<label class="v12cam">＋ 조치 후 사진 (촬영 · 앨범)<input type="file" accept="image/*" multiple class="hide" data-add="1"></label></div>';
    } else {
     if(a.action)h+='<div class="v12fd"><span>조치</span>'+esc(a.action)+'</div>';
     if((a.after||[]).length)h+='<div class="v12ph">'+a.after.map(p=>'<span class="v12pt"><img src="'+p.data+'" alt=""></span>').join('')+'</div>';
@@ -2868,6 +2928,10 @@ function v16Style(){
 .v16row .v16pin{flex:0 0 84px}
 .v16lb{font-size:11.5px;font-weight:800;color:var(--gray)}
 .v16chips{gap:6px}
+.v17who{font-style:normal;font-size:11.5px;font-weight:800;color:var(--navy);background:rgba(30,42,89,.07);border-radius:99px;padding:6px 11px;margin-left:auto}
+.lgmorelink{display:block;width:100%;margin-top:9px;border:1px dashed var(--line);background:transparent;
+ border-radius:12px;padding:12px;font-size:12.5px;font-weight:700;color:var(--gray);font-family:inherit;letter-spacing:-.01em}
+.lgmorelink:active{background:rgba(30,42,89,.05)}
 .chipbtn{border:1px solid var(--line);background:#fff;border-radius:99px;padding:6px 11px;font-size:12px;font-weight:700;color:var(--navy);font-family:inherit}
 .chipbtn.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .hnd{border:1px solid var(--line);background:#fff;border-radius:9px;padding:6px 9px;font-size:14px;line-height:1;color:var(--gray);cursor:grab;touch-action:none;-webkit-user-select:none;user-select:none}
@@ -2885,10 +2949,21 @@ const V17_FREQS=[['daily','일일'],['weekly','주간'],['monthly','월간'],['f
 var v17Open='';
 function v17Ids(){return Object.keys(CHECKS).filter(function(k){return CHECKS[k]&&CHECKS[k].sections})}
 function v17Custom(){return v17Ids().filter(function(k){return !!CHECKS[k].custom})}
+function v17RolesOf(c){
+ if(!c||!c.roles||!c.roles.length)return null;              /* null = 전체 담당자 */
+ const ids=c.roles.filter(function(x){return ROLES.some(function(R){return R.id===x})});
+ return ids.length?ids:null}
 function v17VisibleFor(rid){
  return v17Ids().filter(function(k){const c=CHECKS[k];
-  return c.custom&&!c.disabled&&(!c.roles||c.roles.indexOf(rid)>=0)})}
+  if(!c.custom||c.disabled)return false;
+  const rs=v17RolesOf(c); return !rs||rs.indexOf(rid)>=0})}
 function v17Save(){try{jset(LSM5,CHECKS)}catch(e){}}
+function v17MaySeeRole(rid){ try{ if(role().id==='site')return rid!=='ext' }catch(e){} return true }
+function v17RolesLabel(rs,short){
+ if(!rs||!rs.length)return '전체 담당자';
+ const vis=rs.filter(function(x){return v17MaySeeRole(x)});
+ if(!vis.length)return '관리자 지정';
+ return vis.map(function(x){const R=ROLES.filter(function(y){return y.id===x})[0];return R?(short?R.short:R.name):x}).join(' · ')}
 function v17NewId(){return 'c'+Date.now().toString(36)+Math.floor(Math.random()*900+100)}
 function v17FreqLabel(id){const c=CHECKS[id]||{};
  if(c.freq==='custom')return c.freqLabel||'기타';
@@ -2945,7 +3020,7 @@ function v17Render(){
   const mk=function(t,cls){const x=document.createElement('span');x.className='mini'+(cls?' '+cls:'');x.textContent=t;return x};
   bd.appendChild(mk(c.custom?'직접 만든 양식':'기본 제공'));
   if(c.custom&&c.disabled)bd.appendChild(mk('사용중지'));
-  if(c.custom&&c.roles&&c.roles.length)bd.appendChild(mk(c.roles.map(function(r){const R=ROLES.filter(function(x){return x.id===r})[0];return R?R.short:r}).join('·')));
+  if(c.custom&&c.roles&&c.roles.length){const _lb=v17RolesLabel(c.roles,true);if(_lb)bd.appendChild(mk(_lb))}
   hd.append(ttl,bd);
   const tl=document.createElement('div'); tl.className='v17tools';
   tl.appendChild(v14MkBtn(open?'접기':'편집',function(){v17Open=open?'':id;v17Render()}));
@@ -2978,16 +3053,30 @@ function v17Editor(card,c,id){
  const lb=document.createElement('span'); lb.className='v16lb'; lb.textContent='담당자 공개'; r2.appendChild(lb);
  const allb=document.createElement('button'); allb.type='button';
  allb.className='chipbtn'+((!c.roles||!c.roles.length)?' on':''); allb.textContent='전체 담당자';
- allb.onclick=function(){c.roles=null;v17Save();v17Render();applyRoleUI()};
+ allb.onclick=function(){c.roles=null;v17Save();v17Render();applyRoleUI();toast('공개 대상: 전체 담당자')};
  r2.appendChild(allb);
- ROLES.forEach(function(R){
-  const on=!!(c.roles&&c.roles.indexOf(R.id)>=0);
+ ROLES.filter(function(R){return v17MaySeeRole(R.id)}).forEach(function(R){
+  const cur=v17RolesOf(c);
+  const on=!cur||cur.indexOf(R.id)>=0;
   const b=document.createElement('button'); b.type='button'; b.className='chipbtn'+(on?' on':''); b.textContent=R.name;
   b.onclick=function(){
-   const ids=(c.roles&&c.roles.length)?c.roles.slice():ROLES.map(function(x){return x.id});
-   const k=ids.indexOf(R.id); if(k>=0)ids.splice(k,1); else ids.push(R.id);
-   c.roles=(ids.length===ROLES.length)?null:ids; v17Save(); v17Render(); applyRoleUI()};
+   const rs=v17RolesOf(c);
+   let ids;
+   if(!rs){ ids=[R.id]; }                    /* 전체 → 이 역할만 선택 */
+   else{
+    ids=rs.slice(); const k=ids.indexOf(R.id);
+    if(k>=0)ids.splice(k,1); else ids.push(R.id);
+   }
+   c.roles=(!ids.length||ids.length===ROLES.length)?null:ids;   /* 전부/전무 = 전체 */
+   v17Save(); v17Render(); applyRoleUI();
+   const nx=v17RolesOf(c);
+   toast('공개 대상: '+v17RolesLabel(nx))};
   r2.appendChild(b)});
+ r2.appendChild((function(){
+  const em=document.createElement('em'); em.className='v17who';
+  const rs=v17RolesOf(c);
+  em.textContent='공개 대상: '+v17RolesLabel(rs);
+  return em})());
  box.appendChild(r2);
  (c.sections||[]).forEach(function(sec,si){
   const sh=document.createElement('div'); sh.className='v17sect';
@@ -3108,7 +3197,7 @@ function v17Style(){
 try{v17Style()}catch(e){}
 
 
-async function init(){
+async function init(){try{if(typeof v20AfterBoot==='function')setTimeout(v20AfterBoot,900)}catch(e){}
  document.getElementById('centerList').innerHTML=SET.centers.map(c=>`<option value="${c}">`).join('');
  const inspList=()=>SET.inspectors.map(i=>`<option value="${i}">`).join('');
  document.getElementById('inspList').innerHTML=inspList();
@@ -3123,7 +3212,7 @@ async function init(){
  document.getElementById('btnSave').onclick=async()=>{
   if(typeof v12EnsureActions==='function'&&view!=='admin'&&view!=='stat'){try{v12EnsureActions(cur)}catch(e){}}
   if(view==='stat'){renderStats();return toast('통계를 갱신했습니다')}
-  if(view==='report'){printReport();return}
+  if(view==='report'){if(typeof v20ReportMenu==='function'){v20ReportMenu();return}printReport();return}
   if(view==='admin'){
    const _c1=document.getElementById('admCenters'); if(_c1)SET.centers=_c1.value.split('\n').map(s=>s.trim()).filter(Boolean);
    const _f1=document.getElementById('admFacs'); if(_f1)SET.facilities=_f1.value.split('\n').map(s=>s.trim()).filter(Boolean);
@@ -3782,6 +3871,195 @@ try{
 }catch(e){}
 
 window.addEventListener('beforeunload',saveDraft);
+
+/* ===================== v20 : 스플래시 · 세션 · 앨범사진 · 브랜드 · 결과서 전송 ===================== */
+var lgKeep=false, onbIdx=0;
+function BRAND(){try{var b=(SET&&SET.brand)||{};return{logo:b.logo||'',name:b.name||'(주)바운스',app:b.app||'모험시설 점검'}}catch(e){return{logo:'',name:'(주)바운스',app:'모험시설 점검'}}}
+function brandLogo(kind){var b=BRAND();if(b.logo)return b.logo;return kind==='pink'?LOGO.pink:LOGO.blue}
+function V(){return (typeof VIS==='function')?VIS():[]}
+function v20StripCapture(){try{document.querySelectorAll('input[type=file][accept*="image"][capture]').forEach(function(i){i.removeAttribute('capture')})}catch(e){}}
+function v20AfterBoot(){
+ v20StripCapture();
+ try{var l=document.getElementById('spLogo');if(l)l.src=brandLogo('blue')}catch(e){}
+ setTimeout(function(){
+  var sp=document.getElementById('splash');
+  if(sp){sp.classList.add('off');setTimeout(function(){try{sp.remove()}catch(e){}},520)}
+  try{v20Account();v20StripCapture()}catch(e){}
+  if(!CURRENT)setTimeout(v20Onboard,320);
+ },1250);
+}
+function v20KeepRow(){
+ var pin=document.getElementById('lgPinRow'); if(!pin)return;
+ if(document.getElementById('lgKeepRow'))return;
+ var d=document.createElement('label'); d.id='lgKeepRow'; d.className='lgkeep';
+ d.innerHTML='<input type="checkbox" id="lgKeep"><span>이 기기에서 로그인 유지<br>(다음에 열 때 로그인 화면을 건너뜁니다)</span>';
+ pin.parentElement.insertBefore(d, pin.nextSibling);
+ var c=d.querySelector('input'); c.checked=!!lgKeep;
+ c.onchange=function(){lgKeep=!!this.checked};
+}
+function v20Account(){
+ try{v20StripCapture()}catch(e){}
+ var ex=document.getElementById('v20Acc'); if(ex)ex.remove();
+ if(!CURRENT)return;
+ var img=document.querySelector('img[alt="(주)바운스"]'); if(!img)return;
+ var host=img.parentElement; if(!host)return;
+ if(host.children.length<2&&host.parentElement&&host.parentElement.children.length>1)host=host.parentElement;
+ var b=document.createElement('button'); b.type='button'; b.id='v20Acc'; b.className='v20acc';
+ b.innerHTML='<span>'+esc(CURRENT.name||'')+'</span><i>'+esc((role()||{}).short||'')+'</i>';
+ b.onclick=function(){
+  modal('계정 · '+esc(CURRENT.name||''),
+   '<div class="v20who"><b>'+esc(CURRENT.name||'')+'</b><span>'+esc((role()||{}).short||'')+'</span></div>'
+   +'<div class="v20hint">'+((CURRENT.centers&&CURRENT.centers.length)?('담당: '+esc(CURRENT.centers.join(', '))):'전체 담당')+'</div>',
+   [['사용자 전환',function(){v20Logout(true)}],['로그아웃',function(){v20Logout(false)}],['닫기',null]]);
+ };
+ host.appendChild(b);
+}
+function v20Logout(switchUser){
+ try{localStorage.removeItem('vx_user_v5')}catch(e){}
+ try{localStorage.removeItem('vx_last_user')}catch(e){}
+ CURRENT=null; lgStep=1; lgPick=null; lgKeep=false; lgShowAll=false;
+ try{var ex=document.getElementById('v20Acc'); if(ex)ex.remove()}catch(e){}
+ try{if(typeof renderLogin==='function')renderLogin()}catch(e){}
+ toast(switchUser?'다른 사용자로 로그인할 수 있습니다':'로그아웃했습니다');
+}
+function v20Onboard(){
+ try{if(localStorage.getItem('vx_onboard_v1')==='1')return}catch(e){}
+ var SL=[['STEP 1','현장에서 바로 점검','점검 탭에서 항목별로 판정하고 사진을 남기면 초안이 자동 저장됩니다.'],
+         ['STEP 2','사진은 촬영도, 앨범에서도','＋ 사진 버튼을 누르면 카메라와 사진 보관함 중에서 고를 수 있습니다. 이미 찍어둔 사진을 그대로 올리세요.'],
+         ['STEP 3','결과서는 바로 전송','결과서 탭에서 저장 버튼을 누르면 인쇄·PDF, 공유(카카오톡·메일), 이미지 저장을 고를 수 있습니다.']];
+ onbIdx=0;
+ function done(){try{localStorage.setItem('vx_onboard_v1','1')}catch(e){}var h=document.getElementById('onb');if(h)h.remove()}
+ function draw(){
+  var host=document.getElementById('onb');
+  if(!host){host=document.createElement('div');host.id='onb';document.body.appendChild(host)}
+  var st=SL[onbIdx];
+  host.innerHTML='<div class="obbox"><div class="obn">'+st[0]+'</div><h3>'+st[1]+'</h3><p>'+st[2]+'</p>'
+   +'<div class="obdots">'+SL.map(function(_,i){return '<i class="'+(i===onbIdx?'on':'')+'"></i>'}).join('')+'</div>'
+   +'<button type="button" class="obgo">'+(onbIdx<SL.length-1?'다음':'시작하기')+'</button>'
+   +'<button type="button" class="obskip">건너뛰기</button></div>';
+  host.querySelector('.obgo').onclick=function(){if(onbIdx<SL.length-1){onbIdx++;draw()}else done()};
+  host.querySelector('.obskip').onclick=done;
+ }
+ draw();
+}
+function v20BrandMount(){
+ var anchor=document.getElementById('admCenters'); if(!anchor)return;
+ if(document.getElementById('v20BrandCard'))return;
+ var host=anchor.closest('.card')||anchor.parentElement;
+ if(!host||!host.parentElement)return;
+ var b=BRAND();
+ var d=document.createElement('div'); d.id='v20BrandCard'; d.className=host.className;
+ d.innerHTML='<div class="v20ttl">브랜드 · 로고<span class="v20tag">화이트라벨</span></div>'
+  +'<div class="v20hint">타 업체에 납품할 때 회사명과 로고를 바꿉니다. 올린 로고는 앱 헤더·로그인·결과서·스플래시에 반영됩니다. (기기별 저장)</div>'
+  +'<div class="v20brandrow"><img id="v20BrandPrev" class="v20prev" src="'+(b.logo||brandLogo('blue'))+'" alt="">'
+  +'<input id="v20BrandName" class="v20in" placeholder="회사명" value="'+esc(b.name)+'">'
+  +'<input id="v20BrandApp" class="v20in" placeholder="앱 이름" value="'+esc(b.app)+'"></div>'
+  +'<div class="v20row2"><label class="v20btn">＋ 로고 이미지<input type="file" id="v20LogoFile" accept="image/*" class="hide"></label>'
+  +'<button type="button" class="v20btn" id="v20BrandSave">저장</button>'
+  +'<button type="button" class="v20btn ghost" id="v20BrandReset">기본 로고로</button>'
+  +'<button type="button" class="v20btn ghost" id="v20AccBtn">계정 · 로그아웃</button></div>';
+ host.parentElement.insertBefore(d, host.nextSibling);
+ d.querySelector('#v20LogoFile').onchange=function(){
+  var file=this.files&&this.files[0]; if(!file)return;
+  var fr=new FileReader();
+  fr.onload=function(){SET.brand=SET.brand||{};SET.brand.logo=fr.result;jset(LSS,SET);
+   d.querySelector('#v20BrandPrev').src=fr.result;toast('로고를 적용했습니다');setTimeout(function(){location.reload()},700)};
+  fr.readAsDataURL(file);
+ };
+ d.querySelector('#v20BrandSave').onclick=function(){
+  SET.brand=SET.brand||{};
+  SET.brand.name=(d.querySelector('#v20BrandName').value||'').trim()||'(주)바운스';
+  SET.brand.app=(d.querySelector('#v20BrandApp').value||'').trim()||'모험시설 점검';
+  jset(LSS,SET);toast('브랜드를 저장했습니다');setTimeout(function(){location.reload()},600);
+ };
+ d.querySelector('#v20BrandReset').onclick=function(){
+  SET.brand=SET.brand||{};delete SET.brand.logo;jset(LSS,SET);toast('기본 로고로 되돌렸습니다');setTimeout(function(){location.reload()},600);
+ };
+ d.querySelector('#v20AccBtn').onclick=function(){var a=document.getElementById('v20Acc');if(a)a.click();else v20Logout(false)};
+}
+function v20ReportMenu(){
+ var r=V().find(function(x){return x.id===rptId})||V()[0];
+ if(!r)return toast('결과서가 없습니다');
+ modal('결과서 내보내기 · 전송',
+  '<div class="v20hint">'+esc((r.center||'')+' · '+(r.date||'')+' · '+(r.inspector||''))+'</div>',
+  [['인쇄 · PDF',function(){printReport()}],
+   ['공유',function(){v20Share(r)}],
+   ['이미지 저장',function(){v20ReportPng(r)}],
+   ['텍스트 복사',function(){copyRich()}],
+   ['ZIP 저장',function(){zipOne(r)}],
+   ['닫기',null]]);
+}
+function v20ReportText(r){
+ var ck=(typeof checksFor==='function'?checksFor(r):null)||{sections:[]};
+ var ok=0,warn=0,bad=0,na=0,list=[];
+ (ck.sections||[]).forEach(function(sec){
+  (sec.items||[]).forEach(function(it){
+   var st=(r.items||{})[it.code]; var v=st?st.v:null; if(!v)return;
+   var nm=(typeof vLabel==='function')?vLabel(v):v;
+   if(v==='ok')ok++;else if(v==='warn')warn++;else if(v==='na')na++;else bad++;
+   if(v!=='ok'&&v!=='na')list.push('  · ['+nm+'] '+(sec.name||'')+' › '+(it.name||it.code||''));
+  });
+ });
+ var L=[];
+ L.push('【'+BRAND().name+' 모험시설 안전점검 결과서】','');
+ L.push('· 점검현장 : '+(r.center||'—')+(r.centerCode?(' ['+r.centerCode+']'):''));
+ L.push('· 점검일자 : '+(r.date||'—'));
+ L.push('· 점 검 자 : '+(r.inspector||'—'));
+ L.push('· 점검양식 : '+((ck.name)||r.checklistId||'—'),'');
+ L.push('· 판정요약 : 총 '+(ok+warn+bad+na)+'항목 / 적합 '+ok+' · 주의 '+warn+' · 부적합 '+bad+(na?(' · 해당없음 '+na):''));
+ if(list.length){L.push('','· 지적사항 ('+list.length+'건)');L=L.concat(list.slice(0,40))}
+ L.push('','※ 본 결과서는 '+(BRAND().app||'모험시설 점검')+' 앱에서 작성되었습니다.');
+ return L.join('\n');
+}
+async function v20Share(r){
+ var t=v20ReportText(r);
+ try{
+  if(navigator.share){await navigator.share({title:'모험시설 점검 결과서 · '+(r.center||''),text:t});return}
+  throw 0;
+ }catch(e){
+  if(e&&e.name==='AbortError')return;
+  try{await navigator.clipboard.writeText(t);return toast('공유 미지원 기기입니다 — 결과서 내용을 복사했습니다 (붙여넣기 하세요)')}catch(e2){}
+  toast('이 브라우저에서는 공유를 지원하지 않습니다');
+ }
+}
+async function v20ReportPng(r){
+ if(!window.html2canvas){toast('이미지 도구를 불러오지 못했습니다 — 인쇄에서 PDF로 저장하세요');return}
+ toast('결과서 이미지를 만드는 중입니다…');
+ var node=document.createElement('div');
+ node.style.cssText='position:fixed;left:-10000px;top:0;width:840px;background:#fff;z-index:-1';
+ var inner='';
+ try{inner=(typeof reportInner==='function')?reportInner(r):''}catch(e){}
+ node.innerHTML='<div style="background:#fff;padding:30px 28px;font-family:Pretendard,system-ui,-apple-system,sans-serif;color:#13181F">'+inner+'</div>';
+ document.body.appendChild(node);
+ try{
+  var cv=await window.html2canvas(node,{scale:2,backgroundColor:'#ffffff',useCORS:true,logging:false});
+  var name='점검결과서_'+(r.center||'')+'_'+String(r.date||'').replace(/-/g,'')+'.png';
+  cv.toBlob(function(blob){
+   if(!blob){toast('이미지 생성에 실패했습니다');return}
+   var f=null; try{f=new File([blob],name,{type:'image/png'})}catch(e){}
+   if(f&&navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],title:name}).catch(function(){})}
+   else{
+    var u=URL.createObjectURL(blob), a=document.createElement('a');
+    a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){try{URL.revokeObjectURL(u)}catch(e){}},5000);
+    toast('이미지를 저장했습니다 — 카카오톡·메일에서 첨부하세요');
+   }
+  },'image/png');
+ }catch(e){toast('이미지 생성에 실패했습니다 — 인쇄에서 PDF로 저장하세요')}
+ finally{try{node.remove()}catch(e){}}
+}
+/* 사진 선택기: capture 제거 → 카메라/앨범 선택창 노출 */
+['pointerdown','touchstart','mousedown','click'].forEach(function(ev){
+ document.addEventListener(ev,function(e){
+  try{
+   v20StripCapture();
+   var t=e.target&&e.target.closest?e.target.closest('label'):null; if(!t)return;
+   var inp=t.querySelector&&t.querySelector('input[type=file][accept*="image"]');
+   if(inp&&inp.hasAttribute('capture'))inp.removeAttribute('capture');
+  }catch(err){}
+ },true);
+});
+
 </script>
 </body>
 </html>
