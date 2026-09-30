@@ -334,14 +334,12 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
   padding:10px 16px;border-radius:999px;font-size:13px;font-weight:700;z-index:99;opacity:0;pointer-events:none;
   transition:.24s;max-width:88vw;text-align:center}
 .toast.on{opacity:1;transform:translate(-50%,0)}
-.modal{position:fixed;inset:0;background:rgba(19,24,31,.55);z-index:90;display:flex;align-items:flex-end;justify-content:center}
+.modal{position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(19,24,31,.55);z-index:90;display:flex;align-items:flex-end;justify-content:center}
 .modal .box{background:#fff;border-radius:18px 18px 0 0;width:100%;max-width:620px;
   padding:20px 17px calc(20px + env(safe-area-inset-bottom));max-height:84vh;overflow:auto}
 .modal h3{margin:0 0 6px;font-size:16px;font-weight:800}
 .modal p{margin:0 0 15px;font-size:13.5px;color:var(--gray);line-height:1.55;overflow-wrap:anywhere}
-.lgate{position:fixed;inset:0;z-index:200;background:linear-gradient(165deg,#1E2A59,#141C3D 58%,#0B1023);display:flex;align-items:center;justify-content:center;padding:16px}
-body.v21gate .wrap{display:none!important}
-body.v21gate{overflow:hidden!important;height:100%;overscroll-behavior:none}
+.lgate{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;background:linear-gradient(165deg,#1E2A59,#141C3D 58%,#0B1023);display:flex;align-items:center;justify-content:center;padding:16px}
 .lgbox{background:#fff;border-radius:16px;width:100%;max-width:430px;padding:20px 18px;max-height:92vh;overflow:auto}
 .lgbox h3{margin:0 0 4px;font-size:17px;font-weight:800}
 .usel{border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:7px;width:100%;display:block}
@@ -374,7 +372,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 }
 
 /* ===== v20 상업적 폴리시 ===== */
-#splash{position:fixed;inset:0;z-index:400;background:linear-gradient(160deg,#1E2A59,#141C3D 58%,#0B1023);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;transition:opacity .45s ease,visibility .45s}
+#splash{position:fixed;top:0;right:0;bottom:0;left:0;z-index:400;background:linear-gradient(160deg,#1E2A59,#141C3D 58%,#0B1023);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;transition:opacity .45s ease,visibility .45s}
 #splash.off{opacity:0;visibility:hidden;pointer-events:none}
 #splash .spLogo{height:32px;width:auto;max-width:70%;animation:spIn .75s cubic-bezier(.2,.8,.2,1) both}
 #splash .spName{color:#fff;font-size:16.5px;font-weight:900;letter-spacing:-.02em;animation:spIn .75s .09s cubic-bezier(.2,.8,.2,1) both}
@@ -401,7 +399,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 .v20who{display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .v20who b{font-size:14.5px;font-weight:900}
 .v20who span{font-size:10.5px;font-weight:800;color:var(--gray);background:var(--line2);border-radius:99px;padding:3px 8px}
-#onb{position:fixed;inset:0;z-index:300;background:rgba(19,24,31,.72);display:flex;align-items:flex-end;justify-content:center}
+#onb{position:fixed;top:0;right:0;bottom:0;left:0;z-index:300;background:rgba(19,24,31,.72);display:flex;align-items:flex-end;justify-content:center}
 #onb .obbox{background:var(--card);width:100%;max-width:430px;border-radius:20px 20px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom));animation:obUp .32s cubic-bezier(.2,.8,.2,1) both}
 @keyframes obUp{from{transform:translateY(34px);opacity:0}to{transform:none;opacity:1}}
 #onb .obn{font-family:var(--fd);font-style:italic;font-weight:900;color:var(--pink);font-size:12.5px;letter-spacing:.08em}
@@ -419,6 +417,11 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 
 /* ===== v21 상업화: 아이디 로그인 · 요금제 · 테넌트 ===== */
 html.v21lock,body.v21lock{overflow:hidden!important;height:100%;overscroll-behavior:none;touch-action:pan-y}
+html.v21gate,body.v21gate{background:#141C3D!important}
+html.v21lock{background:#0B1023}
+#splash{height:100%;min-height:100vh}
+body.v21gate .wrap{display:none!important}
+body.v21gate #lgate{display:flex!important}
 .v21lg{display:flex;flex-direction:column;gap:11px}
 .v21lgLogo{text-align:center;margin:2px 0 12px}
 .v21lgLogo img{height:26px;width:auto;max-width:66%}
@@ -458,7 +461,7 @@ html.v21lock,body.v21lock{overflow:hidden!important;height:100%;overscroll-behav
 #onb .obbox{border-radius:22px 22px 0 0!important;box-shadow:0 -18px 40px -24px rgba(0,0,0,.6)}
 
 /* ===== v21b 관리자 콘솔 ===== */
-#v21Admin{position:fixed;inset:0;z-index:350;background:var(--bg);display:flex;flex-direction:column;overscroll-behavior:contain}
+#v21Admin{position:fixed;top:0;right:0;bottom:0;left:0;z-index:350;background:var(--bg);display:flex;flex-direction:column;overscroll-behavior:contain}
 .v21admbar{display:flex;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;background:var(--navy);color:#fff}
 .v21admbar b{font-size:16px;font-weight:900;display:block}
 .v21admbar span{font-size:11px;opacity:.72;display:block;margin-top:2px}
@@ -2704,7 +2707,7 @@ var v15Tab='items';
 function askInput(title,ph,def,cb){
  const old=document.getElementById('askWrap'); if(old)old.parentNode.removeChild(old);
  const w=document.createElement('div'); w.id='askWrap';
- w.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(19,24,31,.45);display:flex;align-items:center;justify-content:center;padding:18px';
+ w.style.cssText='position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;background:rgba(19,24,31,.45);display:flex;align-items:center;justify-content:center;padding:18px';
  const b=document.createElement('div');
  b.style.cssText='background:#fff;border-radius:18px;padding:18px;width:100%;max-width:340px;box-shadow:0 24px 60px -20px rgba(19,24,31,.5)';
  const t=document.createElement('div');
@@ -2939,7 +2942,7 @@ function v16Sort(dir){
 function askForm(title,fields,cb){
  const old=document.getElementById('askWrap'); if(old&&old.parentNode)old.parentNode.removeChild(old);
  const w=document.createElement('div'); w.id='askWrap';
- w.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(19,24,31,.45);display:flex;align-items:center;justify-content:center;padding:18px';
+ w.style.cssText='position:fixed;top:0;right:0;bottom:0;left:0;z-index:9999;background:rgba(19,24,31,.45);display:flex;align-items:center;justify-content:center;padding:18px';
  const b=document.createElement('div');
  b.style.cssText='background:#fff;border-radius:18px;padding:18px;width:100%;max-width:360px;box-shadow:0 24px 60px -20px rgba(19,24,31,.5);max-height:86vh;overflow:auto';
  const t=document.createElement('div'); t.style.cssText='font-size:15px;font-weight:800;color:#1e2a59;margin-bottom:6px'; t.textContent=title||'입력';
@@ -3283,7 +3286,7 @@ function v17Style(){
 try{v17Style()}catch(e){}
 
 
-async function init(){try{if(typeof v21Seed==='function')v21Seed();if(typeof v21Lock==='function')v21Lock(true)}catch(e){}try{if(typeof v21Gate==='function')v21Gate(!CURRENT)}catch(e){}try{if(typeof v20AfterBoot==='function')setTimeout(v20AfterBoot,900)}catch(e){}
+async function init(){setTimeout(function(){try{var g=document.getElementById('lgate');if(g&&!g.classList.contains('hide')){var b=document.getElementById('lgBody');if(!b||!b.children.length)v21Gate(false)}}catch(e){}},2200);try{if(typeof v21Seed==='function')v21Seed();if(typeof v21Lock==='function')v21Lock(true)}catch(e){}try{if(typeof v21Gate==='function')v21Gate(!CURRENT)}catch(e){}try{if(typeof v20AfterBoot==='function')setTimeout(v20AfterBoot,900)}catch(e){}
  document.getElementById('centerList').innerHTML=SET.centers.map(c=>`<option value="${c}">`).join('');
  const inspList=()=>SET.inspectors.map(i=>`<option value="${i}">`).join('');
  document.getElementById('inspList').innerHTML=inspList();
@@ -3956,6 +3959,9 @@ window.addEventListener('beforeunload',saveDraft);
 
 /* ===================== v20 : 스플래시 · 세션 · 앨범사진 · 브랜드 · 결과서 전송 ===================== */
 var lgKeep=false, onbIdx=0;
+/* 안전장치: 어떤 이유로든 로딩 화면이 남으면 강제로 치운다 */
+setTimeout(function(){try{var s=document.getElementById('splash');if(s){s.style.display='none'}}catch(e){}},4500);
+window.addEventListener('error',function(){try{var s=document.getElementById('splash');if(s)s.style.display='none'}catch(e){}});
 function BRAND(){try{var b=(SET&&SET.brand)||{};return{logo:b.logo||'',name:b.name||'(주)바운스',app:b.app||'모험시설 점검'}}catch(e){return{logo:'',name:'(주)바운스',app:'모험시설 점검'}}}
 function brandLogo(kind){var b=BRAND();if(b.logo)return b.logo;return kind==='pink'?LOGO.pink:LOGO.blue}
 function V(){return (typeof VIS==='function')?VIS():[]}
@@ -3965,7 +3971,7 @@ function v20AfterBoot(){
  try{var l=document.getElementById('spLogo');if(l)l.src=brandLogo('blue')}catch(e){}
  setTimeout(function(){
   var sp=document.getElementById('splash');
-  if(sp){sp.classList.add('off');setTimeout(function(){try{sp.remove()}catch(e){}},520)}
+  if(sp){sp.classList.add('off');setTimeout(function(){try{sp.style.display='none';sp.remove()}catch(e){}},520)}
   try{ if(!document.getElementById('onb')) v21Lock(false) }catch(e){}
   try{v20Account();v20StripCapture()}catch(e){}
   if(!CURRENT)setTimeout(v20Onboard,320);
@@ -4232,7 +4238,18 @@ function v21Login(){
  if(!hit)return bad('아이디 또는 비밀번호가 맞지 않습니다');
  v21Enter(code,hit,keep);
 }
-function v21Gate(on){try{document.body.classList[on?'add':'remove']('v21gate');var g=document.getElementById('lgate');if(g)g.classList[on?'remove':'add']('hide')}catch(e){}}
+function v21Gate(on){
+ try{
+  var g=document.getElementById('lgate');
+  if(g&&g.parentElement&&g.parentElement!==document.body)document.body.appendChild(g);
+  document.body.classList[on?'add':'remove']('v21gate');
+  document.documentElement.classList[on?'add':'remove']('v21gate');
+  if(g)g.classList[on?'remove':'add']('hide');
+  if(on){
+   setTimeout(function(){try{var b=document.getElementById('lgBody');if(!b||!b.children.length)v21Gate(false)}catch(e){}},1800);
+  }else{ v21Lock(false); }
+ }catch(e){}
+}
 function renderLogin(){
  var body=document.getElementById('lgBody'); if(!body)return;
  try{v21Gate(true)}catch(e){}
