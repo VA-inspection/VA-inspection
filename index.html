@@ -1093,7 +1093,7 @@ const NAV=[['check','점검','<path d="M3 4h14M3 9h14M3 14h9"/>'],
 var TENANTCODE=(function(){try{return (localStorage.getItem('vx_tenant_v1')||'vaunce').toLowerCase()}catch(e){return 'vaunce'}})();
 function nk(k){return TENANTCODE==='vaunce'?k:(k+'@'+TENANTCODE)}
 function nkFor(code,k){return String(code||'').toLowerCase()==='vaunce'?k:(k+'@'+String(code||'').toLowerCase())}
-const LS=nk('vx_recs_v2'), LSD=nk('vx_draft_v2'), LSM=nk('vx_master_v2'), LSS=nk('vx_settings_v2');
+var LS=nk('vx_recs_v2'), LSD=nk('vx_draft_v2'), LSM=nk('vx_master_v2'), LSS=nk('vx_settings_v2');
 let mode='idb';
 function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open('vaunce_inspect',1);
  r.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('recs'))d.createObjectStore('recs',{keyPath:'id'});};
@@ -1128,7 +1128,7 @@ if(!SET.org)SET.org='(주)바운스';
 SET.users.forEach(u=>{if(u.id==='u2'&&/외부 점검위원/.test(u.name||''))u.name='정지문 대표 인스펙터';
  if(u.id==='u2'){u.vendor='어드벤처 인사이트';u.cert='ACCT Level 2 Professional Inspector'}
  if(!u.assign)u.assign=[];});
-const ROLES=DEFAULT_ROLES, LSM5=nk('vx_checks_v5'), LSU=nk('vx_user_v5');
+var ROLES=DEFAULT_ROLES, LSM5=nk('vx_checks_v5'), LSU=nk('vx_user_v5');
 let CHECKS=jget(LSM5,null)||buildDefaultChecks();
 if(!CHECKS.full)CHECKS=buildDefaultChecks();
 (['daily','weekly','monthly','ext','abw','edge','edgeM','ai_line'].concat(Object.keys(buildAI()))).forEach(k=>{if(!CHECKS[k])CHECKS[k]=buildDefaultChecks()[k]});
@@ -4015,6 +4015,7 @@ function v20Logout(switchUser){
  CURRENT=null; lgStep=1; lgPick=null; lgKeep=false; lgShowAll=false;
  try{var ex=document.getElementById('v20Acc'); if(ex)ex.remove()}catch(e){}
  try{if(typeof renderLogin==='function')renderLogin()}catch(e){}
+ try{v21UpdateGate()}catch(e){}
  toast(switchUser?'다른 사용자로 로그인할 수 있습니다':'로그아웃했습니다');
 }
 function v20Onboard(){
@@ -4164,7 +4165,14 @@ function v21Lock(on){
  }catch(e){}
 }
 function v21Tenants(){ try{ return JSON.parse(localStorage.getItem('vx_tenants_v1')||'{}')||{} }catch(e){ return {} } }
-function v21TenantRec(code){ return v21Tenants()[String(code||'').toLowerCase()]||null }
+function v21TenantRec(code){
+ code=String(code||'').toLowerCase();
+ var t={}; try{ t=v21Tenants() }catch(e){}
+ if(t[code])return t[code];
+ if(code==='vaunce')return {code:'vaunce',name:'(주)바운스',plan:{sites:30,users:30,until:'2027-12-31'},active:true,note:'기본 테넌트'};
+ if(code==='vendor')return {code:'vendor',name:'총판 · 업체 발급 콘솔',plan:{sites:99,users:99,until:'2030-12-31'},active:true,vendor:true};
+ return null;
+}
 function v21TenantSave(t){ try{ localStorage.setItem('vx_tenants_v1',JSON.stringify(t)) }catch(e){} }
 function v21Plan(){ var t=v21TenantRec(TENANTCODE); if(TENANTCODE==='vendor')return {sites:99,users:99,until:'2030-12-31'}; return (t&&t.plan)||{} }
 function v21MaxUsers(){ var p=v21Plan(); var m=parseInt(p.users,10); return (m&&m>0)?m:999 }
@@ -4204,12 +4212,30 @@ function v21ParseUser(p,i){
 }
 function v21Complete(user,keep){return {id:user.id,name:user.name,role:user.role,loginId:user.loginId,centers:user.centers||[],vendor:!!user.vendor}}
 function v21Enter(code,user,keep){
+ code=String(code||'').toLowerCase();
+ try{ localStorage.setItem('vx_tenant_v1',code) }catch(e){}
+ try{ localStorage.setItem('vx_session_v2',JSON.stringify({tenant:code,user:v21Complete(user,keep),keep:!!keep,at:Date.now()})) }catch(e){}
+ try{ localStorage.setItem('vx_last_user',user.id) }catch(e){}
+ /* 저장소·새로고침이 막힌 환경에서도 동작하도록 화면 전환은 그 자리에서 처리한다 */
  try{
-  localStorage.setItem('vx_tenant_v1',String(code).toLowerCase());
-  localStorage.setItem('vx_session_v2',JSON.stringify({tenant:String(code).toLowerCase(),user:v21Complete(user,keep),keep:!!keep,at:Date.now()}));
-  localStorage.setItem('vx_last_user',user.id);
- }catch(e){}
- location.reload();
+  var same=(code===TENANTCODE);
+  CURRENT=v21Complete(user,keep); CURRENT._keep=!!keep;
+  lgStep=1; lgKeep=!!keep; lgPick=null;
+  if(!same){
+   TENANTCODE=code;
+   LS=nk('vx_recs_v2'); LSD=nk('vx_draft_v2'); LSM=nk('vx_master_v2'); LSS=nk('vx_settings_v2');
+   LSM5=nk('vx_checks_v5'); LSU=nk('vx_user_v5');
+   try{ MASTER=jget(LSM,null)||JSON.parse(JSON.stringify(DEFAULT_MASTER)) }catch(e){}
+   try{ SET=jget(LSS,null)||JSON.parse(JSON.stringify(DEFAULT_SETTINGS)); if(!SET.users)SET.users=JSON.parse(JSON.stringify(DEFAULT_USERS)) }catch(e){}
+   try{ CHECKS=jget(LSM5,null)||buildDefaultChecks(); if(!CHECKS.full)CHECKS=buildDefaultChecks() }catch(e){}
+  }
+  try{ v21UpdateGate() }catch(e){}
+  try{ v21Lock(false) }catch(e){}
+  var ok=false;
+  try{ init(); ok=true }catch(e){ try{console.warn('enter-init',e)}catch(_){} }
+  if(!ok){ try{ location.reload() }catch(e){} }
+  try{ toast(user.name+' 님, 환영합니다') }catch(e){}
+ }catch(eBig){ try{window.__v21err=String(eBig&&eBig.message||eBig)}catch(_){} try{ location.reload() }catch(e){} }
 }
 function v21Login(){
  v21Seed();
@@ -4244,18 +4270,25 @@ function v21Login(){
  if(!hit)return bad('아이디 또는 비밀번호가 맞지 않습니다');
  v21Enter(code,hit,keep);
 }
-function v21Gate(on){
+function v21UpdateGate(){
  try{
   var g=document.getElementById('lgate');
-  if(g&&g.parentElement&&g.parentElement!==document.body)document.body.appendChild(g);
-  document.body.classList[on?'add':'remove']('v21gate');
-  document.documentElement.classList[on?'add':'remove']('v21gate');
-  if(g)g.classList[on?'remove':'add']('hide');
-  if(on){
-   setTimeout(function(){try{var b=document.getElementById('lgBody');if(!b||!b.children.length)v21Gate(false)}catch(e){}},1800);
-  }else{ v21Lock(false); }
+  if(!g)return;
+  if(g.parentElement&&g.parentElement!==document.body)document.body.appendChild(g);
+  var inApp=!!CURRENT;
+  g.style.display=inApp?'none':'flex';
+  if(inApp){
+   document.body.classList.remove('v21gate'); document.documentElement.classList.remove('v21gate');
+   try{var o=document.getElementById('onb'); if(o)o.remove()}catch(e){}
+   try{v21Lock(false)}catch(e){}
+  }else{
+   document.body.classList.add('v21gate'); document.documentElement.classList.add('v21gate');
+  }
  }catch(e){}
 }
+/* 게이트는 오직 CURRENT 하나로 결정한다 — 호출 순서에 영향을 받지 않는다 */
+function v21Gate(on){ v21UpdateGate(); }
+setInterval(function(){ try{ v21UpdateGate() }catch(e){} }, 700);
 function renderLogin(){
  var body=document.getElementById('lgBody'); if(!body)return;
  try{v21Gate(true)}catch(e){}
@@ -4272,7 +4305,8 @@ function renderLogin(){
   +'<label class="lgkeep"><input type="checkbox" id="v21Keep"><span>이 기기에서 로그인 유지<br>(앱을 열 때 로그인 화면을 건너뜁니다)</span></label>'
   +'<button type="button" class="v21go" id="v21Go">로그인</button>'
   +'</div>';
- document.getElementById('v21Go').onclick=v21Login;
+ var _go=document.getElementById('v21Go');
+ _go.onclick=function(){ if(_go.dataset.busy)return; _go.dataset.busy='1'; var t=_go.textContent; _go.textContent='로그인 중…'; setTimeout(function(){ _go.dataset.busy=''; _go.textContent=t; },2500); v21Login(); };
  ['v21Code','v21Id','v21Pw'].forEach(function(id){
   var e=document.getElementById(id); if(!e)return;
   e.onkeydown=function(ev){ if(ev.key==='Enter')v21Login() };
