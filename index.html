@@ -339,7 +339,9 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
   padding:20px 17px calc(20px + env(safe-area-inset-bottom));max-height:84vh;overflow:auto}
 .modal h3{margin:0 0 6px;font-size:16px;font-weight:800}
 .modal p{margin:0 0 15px;font-size:13.5px;color:var(--gray);line-height:1.55;overflow-wrap:anywhere}
-.lgate{position:fixed;inset:0;z-index:200;background:rgba(19,24,31,.62);display:flex;align-items:center;justify-content:center;padding:16px}
+.lgate{position:fixed;inset:0;z-index:200;background:linear-gradient(165deg,#1E2A59,#141C3D 58%,#0B1023);display:flex;align-items:center;justify-content:center;padding:16px}
+body.v21gate .wrap{display:none!important}
+body.v21gate{overflow:hidden!important;height:100%;overscroll-behavior:none}
 .lgbox{background:#fff;border-radius:16px;width:100%;max-width:430px;padding:20px 18px;max-height:92vh;overflow:auto}
 .lgbox h3{margin:0 0 4px;font-size:17px;font-weight:800}
 .usel{border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:7px;width:100%;display:block}
@@ -427,7 +429,7 @@ html.v21lock,body.v21lock{overflow:hidden!important;height:100%;overscroll-behav
 .v21f input:focus{outline:0;border-color:var(--navy)}
 .v21err{display:none;font-size:12px;font-weight:800;color:var(--pink-d);background:var(--pink-t);border-radius:10px;padding:10px 11px;line-height:1.45}
 .v21err.on{display:block}
-.v21go{width:100%;border:0;background:var(--navy);color:#fff;border-radius:12px;padding:15px;font-family:inherit;font-size:15px;font-weight:900;letter-spacing:-.01em}
+.v21go{width:100%;border:0;background:var(--navy);color:#fff;border-radius:12px;padding:15px;font-family:inherit;font-size:15px;font-weight:900;letter-spacing:-.01em;text-align:center;display:block}
 .v21go:active{transform:scale(.985)}
 .v21help{font-size:11px;color:var(--gray2);text-align:center;line-height:1.5;margin-top:2px}
 .v21shake{animation:v21sh .4s}
@@ -454,6 +456,46 @@ html.v21lock,body.v21lock{overflow:hidden!important;height:100%;overscroll-behav
 #onb .obtop img{height:24px;width:auto;max-width:60%}
 #onb .obtop .n{font-size:12px;font-weight:800;color:rgba(255,255,255,.72);margin-top:11px;letter-spacing:-.01em}
 #onb .obbox{border-radius:22px 22px 0 0!important;box-shadow:0 -18px 40px -24px rgba(0,0,0,.6)}
+
+/* ===== v21b 관리자 콘솔 ===== */
+#v21Admin{position:fixed;inset:0;z-index:350;background:var(--bg);display:flex;flex-direction:column;overscroll-behavior:contain}
+.v21admbar{display:flex;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;background:var(--navy);color:#fff}
+.v21admbar b{font-size:16px;font-weight:900;display:block}
+.v21admbar span{font-size:11px;opacity:.72;display:block;margin-top:2px}
+.v21admbar button{margin-left:auto;border:1px solid rgba(255,255,255,.38);background:transparent;color:#fff;border-radius:99px;padding:8px 14px;font-family:inherit;font-size:12px;font-weight:800}
+.v21admtabs{display:flex;gap:6px;padding:11px 14px;background:var(--card);border-bottom:1px solid var(--line);overflow-x:auto}
+.v21admtabs button{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:8px 13px;font-family:inherit;font-size:12px;font-weight:800;color:var(--gray);white-space:nowrap}
+.v21admtabs button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.v21admbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 14px calc(30px + env(safe-area-inset-bottom))}
+.v21ahead{display:flex;align-items:baseline;gap:8px;margin:2px 0 10px;flex-wrap:wrap}
+.v21ahead b{font-size:15px;font-weight:900}
+.v21ahead span{font-size:11px;color:var(--gray2);font-weight:700}
+.v21aadd{display:flex;gap:7px;margin-bottom:12px}
+.v21aadd input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:11px;padding:12px;font-family:inherit;font-size:16px;background:var(--card);color:var(--ink)}
+.v21aadd button{border:0;background:var(--navy);color:#fff;border-radius:11px;padding:12px 16px;font-family:inherit;font-size:13px;font-weight:900;text-align:center}
+.v21alist{display:flex;flex-direction:column;gap:8px}
+.v21arow{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px}
+.v21arow .m{flex:1;min-width:0}
+.v21arow .m b{display:block;font-size:13.5px;font-weight:900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.v21arow .m b i{font-style:normal;font-family:var(--fd);font-size:11px;color:var(--navy);background:var(--navy-t);border-radius:6px;padding:2px 6px;margin-left:4px}
+.v21arow .m em{display:block;font-style:normal;font-size:11px;color:var(--gray);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.v21arow .b{display:flex;gap:6px;flex:0 0 auto}
+.v21arow .b button{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:8px 10px;font-family:inherit;font-size:11.5px;font-weight:800;color:var(--ink)}
+.v21arow .b button.dg{color:var(--pink-d);border-color:var(--pink-t);background:var(--pink-t)}
+.v21aempty{font-size:12px;color:var(--gray2);padding:10px 2px}
+.v21anote{font-size:11px;color:var(--gray2);line-height:1.55;margin-top:12px}
+.v21aform{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.v21aform .v21f{margin-bottom:10px}
+.v21g2{display:flex;gap:8px}
+.v21g2 .v21f{flex:1;min-width:0}
+.v21f select{width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:11px;padding:13px 12px;font-family:inherit;font-size:16px;background:var(--card);color:var(--ink)}
+.v21cks{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.v21ck{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:99px;padding:7px 11px;font-size:12px;font-weight:700;background:var(--card)}
+.v21ck input{width:17px;height:17px;margin:0}
+.v21abtns{display:flex;gap:8px}
+.v21abtns button{flex:1;border:0;border-radius:11px;padding:13px;font-family:inherit;font-size:13.5px;font-weight:900;text-align:center}
+.v21abtns button.pv{background:var(--navy);color:#fff}
+.v21abtns button.gh{background:var(--line2);color:var(--ink)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
 </head>
@@ -672,7 +714,7 @@ html.v21lock,body.v21lock{overflow:hidden!important;height:100%;overscroll-behav
 
   <div id="lgate" class="lgate hide">
   <div class="lgbox">
-    <h3>누구로 시작할까요?</h3>
+    <h3>로그인</h3>
     <div class="lgsteps" id="lgSteps"></div>
     <div id="lgBody"></div>
     <div class="fld" id="lgPinRow" style="border-bottom:0;display:none"><label>PIN</label><div class="ctl"><input type="password" id="lgPin" inputmode="numeric" maxlength="6" placeholder="••••"></div></div>
@@ -1045,9 +1087,9 @@ const NAV=[['check','점검','<path d="M3 4h14M3 9h14M3 14h9"/>'],
            ['admin','관리','<circle cx="11" cy="11" r="3.2"/><path d="M11 3v2M11 17v2M3 11h2M17 11h2M5.6 5.6l1.4 1.4M15 15l1.4 1.4M16.4 5.6L15 7M7 15l-1.4 1.4"/>']];
 
 /* ---------- 저장소 ---------- */
-var TENANTCODE=(function(){try{return (localStorage.getItem('vx_tenant_v1')||'bounce').toLowerCase()}catch(e){return 'bounce'}})();
-function nk(k){return TENANTCODE==='bounce'?k:(k+'@'+TENANTCODE)}
-function nkFor(code,k){return String(code||'').toLowerCase()==='bounce'?k:(k+'@'+String(code||'').toLowerCase())}
+var TENANTCODE=(function(){try{return (localStorage.getItem('vx_tenant_v1')||'vaunce').toLowerCase()}catch(e){return 'vaunce'}})();
+function nk(k){return TENANTCODE==='vaunce'?k:(k+'@'+TENANTCODE)}
+function nkFor(code,k){return String(code||'').toLowerCase()==='vaunce'?k:(k+'@'+String(code||'').toLowerCase())}
 const LS=nk('vx_recs_v2'), LSD=nk('vx_draft_v2'), LSM=nk('vx_master_v2'), LSS=nk('vx_settings_v2');
 let mode='idb';
 function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open('vaunce_inspect',1);
@@ -1184,7 +1226,7 @@ function newRec(cid){
  const c0=(R.scope==='assigned'&&u&&(u.centers||[]).length)?u.centers[0]:'';
  const o={id:uid('r'),schemaVersion:3,createdAt:Date.now(),updatedAt:Date.now(),rev:1,
   date:todayISO(),center:c0,facilities:[],inspector:who,items:{},extras:[],
-  assignee:'',siteKind:v7IsExtSite(c0)?'ext':'bounce',
+  assignee:'',siteKind:v7IsExtSite(c0)?'ext':'vaunce',
   role:(u?u.role:'int'),checklistId:chId,ownerId:(u?u.id:''),
   createdBy:who,updatedBy:who};
  ITEMS(ms).forEach(i=>{o.items[i.code]={v:null,num:'',note:'',photos:[]}});return o}
@@ -2027,6 +2069,7 @@ function doLogin(){
  const pin=(document.getElementById('lgPin').value||'').trim();
  if(pin!==(u.pin||'1111'))return toast('PIN이 맞지 않습니다');
  CURRENT=u;try{var _kp=(typeof lgKeep!=='undefined'&&!!lgKeep);CURRENT._keep=_kp;localStorage.setItem('vx_user_v5',JSON.stringify(CURRENT));if(_kp)localStorage.setItem('vx_last_user',CURRENT.id);else localStorage.removeItem('vx_last_user')}catch(e){};jset(LSU,CURRENT);try{localStorage.setItem('vx_last_user',u.id)}catch(e){};lgStep=1;
+ try{v21Gate(false)}catch(e){}
  document.getElementById('lgate').classList.add('hide');
  cur=newRec();document.getElementById('fDate').value=cur.date;
  document.getElementById('fInsp').value=cur.inspector;
@@ -3240,7 +3283,7 @@ function v17Style(){
 try{v17Style()}catch(e){}
 
 
-async function init(){try{if(typeof v21Seed==='function')v21Seed();if(typeof v21Lock==='function')v21Lock(true)}catch(e){}try{if(typeof v20AfterBoot==='function')setTimeout(v20AfterBoot,900)}catch(e){}
+async function init(){try{if(typeof v21Seed==='function')v21Seed();if(typeof v21Lock==='function')v21Lock(true)}catch(e){}try{if(typeof v21Gate==='function')v21Gate(!CURRENT)}catch(e){}try{if(typeof v20AfterBoot==='function')setTimeout(v20AfterBoot,900)}catch(e){}
  document.getElementById('centerList').innerHTML=SET.centers.map(c=>`<option value="${c}">`).join('');
  const inspList=()=>SET.inspectors.map(i=>`<option value="${i}">`).join('');
  document.getElementById('inspList').innerHTML=inspList();
@@ -3950,7 +3993,7 @@ function v20Account(){
   modal('계정 · '+esc(CURRENT.name||''),
    '<div class="v20who"><b>'+esc(CURRENT.name||'')+'</b><span>'+esc((role()||{}).short||'')+'</span></div>'
    +'<div class="v20hint">'+((CURRENT.centers&&CURRENT.centers.length)?('담당: '+esc(CURRENT.centers.join(', '))):'전체 담당')+'</div>',
-   [['사용자 전환',function(){v20Logout(true)}],['로그아웃',function(){v20Logout(false)}],['닫기',null]]);
+   [['관리자 콘솔',function(){v21AdminOpen()}],['사용자 전환',function(){v20Logout(true)}],['로그아웃',function(){v20Logout(false)}],['닫기',null]]);
  };
  host.appendChild(b);
 }
@@ -4117,7 +4160,8 @@ function v21SiteCount(){ try{ return ((SET.centers||[]).length)+((SET.extSites||
 function v21Seed(){
  try{
   var t=v21Tenants(), ch=false;
-  if(!t.bounce){ t.bounce={code:'bounce',name:'(주)바운스',plan:{sites:8,users:30,until:'2027-12-31'},active:true,note:'기존 데이터 · 기본 테넌트',createdAt:Date.now()}; ch=true }
+  if(!t.vaunce){ t.vaunce={code:'vaunce',name:'(주)바운스',plan:{sites:30,users:30,until:'2027-12-31'},active:true,note:'기존 데이터 · 기본 테넌트',createdAt:Date.now()}; ch=true }
+  if(t.bounce&&!t.vaunce){ t.vaunce=t.bounce; t.vaunce.code='vaunce'; delete t.bounce; ch=true }
   if(!t.vendor){ t.vendor={code:'vendor',name:'총판 · 업체 발급 콘솔',plan:{sites:99,users:99,until:'2030-12-31'},active:true,vendor:true,note:'업체 발급용',createdAt:Date.now()}; ch=true }
   if(ch)v21TenantSave(t);
  }catch(e){}
@@ -4133,7 +4177,7 @@ function v21Norm(u,i){ u=u||{};
 function v21UsersOf(code){
  try{ var raw=jget(nkFor(code,'vx_settings_v2'),null); var us=(raw&&raw.users)||null;
       if(us&&us.length)return us.map(v21Norm); }catch(e){}
- if(String(code).toLowerCase()==='bounce')return (DEFAULT_USERS||[]).map(v21Norm);
+ if(String(code).toLowerCase()==='vaunce')return (DEFAULT_USERS||[]).map(v21Norm);
  return [];
 }
 function v21ParseUser(p,i){
@@ -4188,11 +4232,12 @@ function v21Login(){
  if(!hit)return bad('아이디 또는 비밀번호가 맞지 않습니다');
  v21Enter(code,hit,keep);
 }
+function v21Gate(on){try{document.body.classList[on?'add':'remove']('v21gate');var g=document.getElementById('lgate');if(g)g.classList[on?'remove':'add']('hide')}catch(e){}}
 function renderLogin(){
  var body=document.getElementById('lgBody'); if(!body)return;
+ try{v21Gate(true)}catch(e){}
  ['lgSteps','lgPinRow','lgBack','lgGo'].forEach(function(id){var e=document.getElementById(id); if(e)e.style.display='none'});
  var ttl=document.querySelector('.lgbox h2, .lgbox .lgt, .lgbox h1');
- if(ttl&&/시작|누구/.test(ttl.textContent||''))ttl.textContent='로그인';
  var last=''; try{last=localStorage.getItem('vx_tenant_v1')||''}catch(e){}
  var BR=BRAND();
  body.innerHTML='<div class="v21lg">'
@@ -4203,7 +4248,6 @@ function renderLogin(){
   +'<div id="v21Err" class="v21err"></div>'
   +'<label class="lgkeep"><input type="checkbox" id="v21Keep"><span>이 기기에서 로그인 유지<br>(앱을 열 때 로그인 화면을 건너뜁니다)</span></label>'
   +'<button type="button" class="v21go" id="v21Go">로그인</button>'
-  +'<div class="v21help">회사 코드는 계약 시 발급됩니다.<br>분실 시 담당자에게 문의하세요.</div>'
   +'</div>';
  document.getElementById('v21Go').onclick=v21Login;
  ['v21Code','v21Id','v21Pw'].forEach(function(id){
@@ -4243,8 +4287,10 @@ function v21Mount(){
    +'<span class="v21pill">남은 현장 <b>'+left+'</b></span>'
    +'<span class="v21pill">만료 <b>'+esc(p.until||'—')+'</b></span>'
    +'</div>'
-   +'<div class="v20hint">'+(smax?('현장(센터)은 플랜 한도 '+smax+'개까지 추가할 수 있습니다. 한도에 도달하면 담당자에게 요금제 상향을 요청하세요.'):'현장 수 제한이 없는 플랜입니다.')+'</div>';
+   +'<div class="v20hint">'+(smax?('현장(센터)은 플랜 한도 '+smax+'개까지 추가할 수 있습니다. 한도에 도달하면 담당자에게 요금제 상향을 요청하세요.'):'현장 수 제한이 없는 플랜입니다.')+'</div>'
+   +'<div class="v20row2"><button type="button" class="v20btn" id="v21OpenConsole">관리자 콘솔 열기 — 매장 · 계정</button></div>';
   host.parentElement.insertBefore(d, host.nextSibling);
+  try{var _oc=d.querySelector('#v21OpenConsole'); if(_oc)_oc.onclick=v21AdminOpen}catch(e){}
  }
  var vd=(CURRENT&&CURRENT.vendor)||TENANTCODE==='vendor';
  if(vd&&!document.getElementById('v21TntCard')){
@@ -4334,7 +4380,181 @@ function v21IssueForm(){
   }],['닫기',null]]);
 }
 
+
+/* ===================== v21b : 관리자 콘솔 (매장 · 계정 · 요금제) ===================== */
+var v21AdmTab='center', v21AdmUserEdit=null;
+function v21CanAdmin(){ try{ if(CURRENT&&CURRENT.vendor)return true; var R=role(); return !!(R&&R.canMaster) }catch(e){ return false } }
+function v21RoleName(id){ var r=(ROLES||[]).filter(function(x){return x.id===id})[0]; return r?r.short:id }
+function v21SyncAdm(){
+ try{ var t=document.getElementById('admUsers'); if(!t)return;
+  t.value=(SET.users||[]).map(function(u){return [u.name,(u.loginId||u.id||''),(u.role||'site'),(u.password||u.pin||''),(u.centers||[]).join(',')].join('|')}).join('\n');
+ }catch(e){}
+}
+function v21AfterChange(){
+ try{jset(LSS,SET)}catch(e){}
+ try{if(typeof v14RenderCenters==='function')v14RenderCenters()}catch(e){}
+ try{if(typeof renderFacAdmin==='function')renderFacAdmin()}catch(e){}
+ try{if(typeof v16RenderUsers==='function')v16RenderUsers()}catch(e){}
+ try{var cl=document.getElementById('centerList'); if(cl)cl.innerHTML=(SET.centers||[]).map(function(c){return '<option value="'+esc(c)+'">'}).join('')}catch(e){}
+ try{v21SyncAdm()}catch(e){}
+ try{v21AdminRender()}catch(e){}
+}
+function v21AdminOpen(){ if(!v21CanAdmin())return toast('관리자만 사용할 수 있습니다'); v21AdmTab='center'; v21AdmUserEdit=null; v21AdminRender(); }
+function v21AdminClose(){ var e=document.getElementById('v21Admin'); if(e)e.remove(); }
+function v21AdmHead(){
+ var BR=BRAND();
+ return '<div class="v21admbar"><div><b>관리자 콘솔</b><span>'+esc(BR.name)+' · '+esc(TENANTCODE)+'</span></div><button type="button" id="v21AdmClose">닫기</button></div>';
+}
+function v21AdminRender(){
+ var old=document.getElementById('v21Admin'); if(old)old.remove();
+ var d=document.createElement('div'); d.id='v21Admin';
+ d.innerHTML=v21AdmHead()
+  +'<div class="v21admtabs">'+[['center','매장 관리'],['user','계정 관리'],['plan','요금제']].map(function(t){
+     return '<button type="button" class="'+(v21AdmTab===t[0]?'on':'')+'" data-tab="'+t[0]+'">'+t[1]+'</button>'}).join('')+'</div>'
+  +'<div class="v21admbody" id="v21AdmBody"></div>';
+ document.body.appendChild(d);
+ var p=v21Plan(), n=v21SiteCount();
+ d.querySelector('#v21AdmClose').onclick=v21AdminClose;
+ d.querySelectorAll('.v21admtabs button').forEach(function(b){
+  b.onclick=function(){ v21AdmTab=b.dataset.tab; v21AdmUserEdit=null; v21AdminRender() };
+ });
+ var body=d.querySelector('#v21AdmBody');
+ body.innerHTML=(v21AdmTab==='center')?v21AdmCenters(p,n):((v21AdmTab==='user')?v21AdmUsers(p):v21AdmPlan(p,n));
+ v21AdmBind(d);
+}
+function v21AdmCenters(p,n){
+ var smax=parseInt(p.sites,10)||0;
+ var rows=(SET.centers||[]).map(function(c){
+  var code=(SET.centerCode||{})[c]||'—';
+  var fac=((SET.facByCenter||{})[c]||[]).length;
+  return '<div class="v21arow"><div class="m"><b>'+esc(c)+'</b><em>'+esc(code)+' · 시설 '+fac+'개</em></div>'
+   +'<div class="b"><button type="button" data-ren="'+esc(c)+'">이름변경</button><button type="button" class="dg" data-del="'+esc(c)+'">삭제</button></div></div>';
+ }).join('')||'<div class="v21aempty">등록된 매장이 없습니다 — 아래에서 추가하세요</div>';
+ var ext=(SET.extSites||[]).length;
+ return '<div class="v21ahead"><b>매장(센터) '+n+(smax?(' / '+smax):'')+'</b><span>'+(smax?('한도까지 '+Math.max(0,smax-n)+'개 추가 가능'):'한도 없음')+'</span></div>'
+  +'<div class="v21aadd"><input id="v21NewCenter" placeholder="새 매장명 (예) 잠실센터" autocapitalize="off"><button type="button" id="v21AddCenter">추가</button></div>'
+  +'<div class="v21alist">'+rows+'</div>'
+  +'<div class="v21anote">추가한 매장은 점검 화면의 「센터」 목록에 즉시 나타납니다. 이름을 바꾸면 기존 점검 기록·시설 설정도 함께 옮겨집니다. 외부현장 '+ext+'곳은 관리 탭 &gt; 센터에서 관리합니다.</div>';
+}
+function v21AdmUsers(p){
+ var umax=parseInt(p.users,10)||0, us=SET.users||[];
+ if(v21AdmUserEdit!==null)return v21AdmUserForm(v21AdmUserEdit);
+ var rows=us.map(function(u,i){
+  return '<div class="v21arow"><div class="m"><b>'+esc(u.name||'')+'<i>'+esc(u.loginId||u.id)+'</i></b>'
+   +'<em>'+esc(v21RoleName(u.role))+((u.centers&&u.centers.length)?(' · '+esc(u.centers.join(', '))):' · 전체 담당')+'</em></div>'
+   +'<div class="b"><button type="button" data-uedit="'+i+'">수정</button><button type="button" class="dg" data-udel="'+i+'">삭제</button></div></div>';
+ }).join('')||'<div class="v21aempty">등록된 계정이 없습니다</div>';
+ return '<div class="v21ahead"><b>계정 '+us.length+(umax?(' / '+umax):'')+'</b><span>아이디·비밀번호를 여기서 관리합니다</span></div>'
+  +'<div class="v21aadd"><button type="button" id="v21AddUser" style="width:100%">＋ 새 계정 추가</button></div>'
+  +'<div class="v21alist">'+rows+'</div>'
+  +'<div class="v21anote">역할 — '+(ROLES||[]).map(function(r){return esc(r.short)}).join(' · ')+'<br>현장 직원은 담당 매장을 반드시 지정하세요(해당 매장 점검만 보입니다).</div>';
+}
+function v21AdmUserForm(i){
+ var nu=(i===-1), u=nu?{name:'',loginId:'',password:'',role:'site',centers:[]}:(SET.users[i]||{});
+ var ro=(ROLES||[]).map(function(r){return '<option value="'+r.id+'"'+(u.role===r.id?' selected':'')+'>'+esc(r.short)+'</option>'}).join('');
+ var ck=(SET.centers||[]).map(function(c){return '<label class="v21ck"><input type="checkbox" value="'+esc(c)+'"'+(((u.centers||[]).indexOf(c)>=0)?' checked':'')+'>'+esc(c)+'</label>'}).join('');
+ return '<div class="v21aform">'
+  +'<div class="v21ahead"><b>'+(nu?'새 계정':'계정 수정')+'</b><span>'+(nu?'로그인 정보를 만들어 전달하세요':'아이디를 바꾸면 다음 로그인부터 적용됩니다')+'</span></div>'
+  +'<label class="v21f"><span>이름</span><input id="v21UName" autocapitalize="off" value="'+esc(u.name||'')+'" placeholder="예) 양홍준 과장"></label>'
+  +'<div class="v21g2"><label class="v21f"><span>아이디</span><input id="v21UId" autocapitalize="none" value="'+esc(u.loginId||'')+'" placeholder="예) hong"></label>'
+  +'<label class="v21f"><span>비밀번호</span><input id="v21UPw" autocapitalize="none" value="'+esc(u.password||u.pin||'')+'" placeholder="4자 이상"></label></div>'
+  +'<label class="v21f"><span>역할</span><select id="v21URole">'+ro+'</select></label>'
+  +'<label class="v21f"><span>담당 매장</span></label>'
+  +'<div class="v21cks">'+(ck||'<span class="v21aempty">매장을 먼저 추가하세요</span>')+'</div>'
+  +'<div class="v21abtns"><button type="button" class="pv" id="v21USave">저장</button><button type="button" class="gh" id="v21UCancel">취소</button></div>'
+  +'</div>';
+}
+function v21AdmPlan(p,n){
+ var smax=parseInt(p.sites,10)||0, umax=parseInt(p.users,10)||0, nu=(SET.users||[]).length;
+ var t=v21TenantRec(TENANTCODE)||{};
+ return '<div class="v21ahead"><b>요금제 · 사용량</b><span>'+esc(t.name||TENANTCODE)+'</span></div>'
+  +'<div class="v21alist">'
+  +'<div class="v21arow"><div class="m"><b>매장(현장)</b><em>사용 '+n+(smax?(' / 한도 '+smax):' / 한도 없음')+'</em></div></div>'
+  +'<div class="v21arow"><div class="m"><b>계정</b><em>사용 '+nu+(umax?(' / 한도 '+umax):' / 한도 없음')+'</em></div></div>'
+  +'<div class="v21arow"><div class="m"><b>계약 만료</b><em>'+esc(p.until||'—')+'</em></div></div>'
+  +'<div class="v21arow"><div class="m"><b>상태</b><em>'+((t.active===false)?'중지':'사용중')+'</em></div></div>'
+  +'</div>'
+  +'<div class="v21anote">매장 수 한도에 도달하면 매장 추가가 차단되고 상향 안내가 표시됩니다. 요금제 변경은 총판(공급자) 계정에서 설정합니다.</div>';
+}
+function v21AdmBind(d){
+ var g=function(id){return document.getElementById(id)};
+ var add=g('v21AddCenter'); if(add)add.onclick=v21CenterAdd;
+ var nc=g('v21NewCenter'); if(nc)nc.onkeydown=function(e){ if(e.key==='Enter')v21CenterAdd() };
+ d.querySelectorAll('[data-ren]').forEach(function(b){ b.onclick=function(){ v21CenterRename(b.dataset.ren) } });
+ d.querySelectorAll('[data-del]').forEach(function(b){ b.onclick=function(){ v21CenterDel(b.dataset.del) } });
+ var au=g('v21AddUser'); if(au)au.onclick=function(){ v21AdmUserEdit=-1; v21AdminRender() };
+ d.querySelectorAll('[data-uedit]').forEach(function(b){ b.onclick=function(){ v21AdmUserEdit=parseInt(b.dataset.uedit,10); v21AdminRender() } });
+ d.querySelectorAll('[data-udel]').forEach(function(b){ b.onclick=function(){ v21UserDel(parseInt(b.dataset.udel,10)) } });
+ var uc=g('v21UCancel'); if(uc)uc.onclick=function(){ v21AdmUserEdit=null; v21AdminRender() };
+ var us=g('v21USave'); if(us)us.onclick=v21UserSave;
+}
+function v21CenterAdd(){
+ var el=document.getElementById('v21NewCenter'); var v=(el&&el.value||'').trim();
+ if(!v)return toast('매장명을 입력하세요');
+ if((SET.centers||[]).indexOf(v)>=0)return toast('이미 있는 매장명입니다');
+ if(!v21CenterGuard())return;
+ SET.centers=SET.centers||[]; SET.centers.push(v);
+ if(!SET.facByCenter)SET.facByCenter={};
+ if(SET.facByCenter[v]===undefined)SET.facByCenter[v]=(SET.facilities||[]).slice();
+ try{if(typeof v16CodeAll==='function')v16CodeAll()}catch(e){}
+ v21AfterChange(); toast('매장을 추가했습니다 — '+v);
+}
+function v21CenterRename(name){
+ modal('매장 이름 변경',
+  '<label class="v21f"><span>새 매장명</span><input id="v21RenIn" autocapitalize="off" value="'+esc(name)+'"></label>',
+  [['변경',function(){
+    var v=(document.getElementById('v21RenIn').value||'').trim();
+    if(!v)return toast('이름을 입력하세요');
+    if(v===name)return toast('같은 이름입니다');
+    try{ var ok=v14RenameCenter(name,v); if(ok===0)return; }catch(e){ toast('변경에 실패했습니다'); return }
+    v21AfterChange(); toast('이름을 바꿨습니다 — '+v);
+  }],['취소',null]]);
+}
+function v21CenterDel(name){
+ var rc=0; try{ rc=(RECS||[]).filter(function(r){return r.center===name}).length }catch(e){}
+ modal('매장 삭제',
+  '<div class="v21lim">「'+esc(name)+'」 매장을 목록에서 삭제합니다.'
+  +(rc?('<br><br>이 매장의 점검 기록 <b>'+rc+'건</b>은 삭제되지 않고 그대로 보관됩니다.'):'')
+  +'</div>',
+  [['삭제',function(){
+    SET.centers=(SET.centers||[]).filter(function(c){return c!==name});
+    try{ delete (SET.centerCode||{})[name] }catch(e){}
+    try{ delete (SET.facByCenter||{})[name] }catch(e){}
+    try{ delete (SET.storeChecks||{})[name] }catch(e){}
+    (SET.users||[]).forEach(function(u){ if(u.centers)u.centers=u.centers.filter(function(c){return c!==name}) });
+    v21AfterChange(); toast('삭제했습니다 — '+name);
+  }],['취소',null]]);
+}
+function v21UserSave(){
+ var g=function(id){return document.getElementById(id)};
+ var nm=(g('v21UName').value||'').trim(), id=(g('v21UId').value||'').trim().toLowerCase(), pw=(g('v21UPw').value||'').trim();
+ var rl=(g('v21URole').value||'site');
+ var cs=[]; document.querySelectorAll('.v21cks input:checked').forEach(function(c){cs.push(c.value)});
+ if(!nm)return toast('이름을 입력하세요');
+ if(!id)return toast('아이디를 입력하세요');
+ if(!/^[a-z0-9._-]{3,}$/.test(id))return toast('아이디는 영문·숫자 3자 이상 (._- 가능)');
+ if(pw.length<4)return toast('비밀번호는 4자 이상이어야 합니다');
+ if(rl==='site'&&!cs.length)return toast('현장 직원은 담당 매장을 1개 이상 선택하세요');
+ var dup=(SET.users||[]).some(function(u,i){ return (u.loginId||u.id||'').toLowerCase()===id && i!==v21AdmUserEdit });
+ if(dup)return toast('이미 사용 중인 아이디입니다');
+ var rec={name:nm,loginId:id,password:pw,pin:pw,role:rl,centers:cs};
+ if(v21AdmUserEdit===-1){
+  if((SET.users||[]).length>=v21MaxUsers())return toast('계정 한도('+v21MaxUsers()+'개)를 초과했습니다');
+  rec.id='u'+Date.now().toString(36);
+  SET.users=SET.users||[]; SET.users.push(rec);
+ } else {
+  var u=SET.users[v21AdmUserEdit]; if(!u)return;
+  u.name=rec.name;u.loginId=rec.loginId;u.password=rec.password;u.pin=rec.pin;u.role=rec.role;u.centers=rec.centers;
+ }
+ v21AdmUserEdit=null; v21AfterChange(); toast('계정을 저장했습니다 — '+nm);
+}
+function v21UserDel(i){
+ var u=(SET.users||[])[i]; if(!u)return;
+ if((SET.users||[]).length<=1)return toast('계정이 최소 1개는 있어야 합니다');
+ modal('계정 삭제','<div class="v21lim">「'+esc(u.name||'')+' ('+esc(u.loginId||u.id)+')」 계정을 삭제합니다.<br><br>이 계정으로 로그인할 수 없게 됩니다.</div>',
+  [['삭제',function(){ SET.users.splice(i,1); v21AfterChange(); toast('계정을 삭제했습니다') }],['취소',null]]);
+}
+
 </script>
-<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 </body>
 </html>
