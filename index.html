@@ -339,8 +339,8 @@ hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
   padding:20px 17px calc(20px + env(safe-area-inset-bottom));max-height:84vh;overflow:auto}
 .modal h3{margin:0 0 6px;font-size:16px;font-weight:800}
 .modal p{margin:0 0 15px;font-size:13.5px;color:var(--gray);line-height:1.55;overflow-wrap:anywhere}
-.lgate{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;background:linear-gradient(165deg,#1E2A59,#141C3D 58%,#0B1023);display:flex;align-items:center;justify-content:center;padding:16px}
-.lgbox{background:#fff;border-radius:16px;width:100%;max-width:430px;padding:20px 18px;max-height:92vh;overflow:auto}
+.lgate{position:fixed;top:0;right:0;bottom:0;left:0;z-index:200;background:linear-gradient(165deg,#1E2A59,#141C3D 58%,#0B1023);display:flex;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.lgbox{background:#fff;border-radius:16px;width:100%;max-width:430px;padding:20px 18px;margin:auto;max-height:none}
 .lgbox h3{margin:0 0 4px;font-size:17px;font-weight:800}
 .usel{border:1.5px solid var(--line);border-radius:12px;padding:11px 12px;margin-bottom:7px;width:100%;display:block}
 .usel[aria-pressed=true]{border-color:var(--navy);background:var(--navy-t)}
@@ -1233,8 +1233,13 @@ function newRec(cid){
   role:(u?u.role:'int'),checklistId:chId,ownerId:(u?u.id:''),
   createdBy:who,updatedBy:who};
  ITEMS(ms).forEach(i=>{o.items[i.code]={v:null,num:'',note:'',photos:[]}});return o}
-function migrate(o){ if(!o.schemaVersion)o.schemaVersion=2;
+function migrate(o){ o=o||{}; if(!o.schemaVersion)o.schemaVersion=2;
  if(!o.items)o.items={}; if(!o.extras)o.extras=[];
+ if(!Array.isArray(o.facilities))o.facilities=[];
+ if(!Array.isArray(o.actions))o.actions=[];
+ if(!Array.isArray(o.photos))o.photos=[];
+ if(o.center==null)o.center=''; if(o.date==null)o.date=''; if(o.inspector==null)o.inspector='';
+ if(!o.checklistId)o.checklistId='full'; if(o.centerCode==null)o.centerCode=''; if(!o.id)o.id='r'+Date.now().toString(36);
  Object.keys(o.items).forEach(c=>{const it=o.items[c];
   if(!Array.isArray(it.photos))it.photos=[]; if(it.num==null)it.num=''; if(it.note==null)it.note='';
   it.photos=it.photos.map(p=>typeof p==='string'?{id:uid('p'),data:p,ts:o.date||Date.now(),out:true}:(p.out===undefined?Object.assign(p,{out:true}):p)).filter(Boolean)});
@@ -1455,14 +1460,15 @@ const albumClear=()=>{};
 /* ---------- 기록 · 사진 폴더 ---------- */
 async function refreshRecs(){RECS=(await dbAll()).map(migrate);
  RECS.sort((a,b)=>(b.date||'').localeCompare(a.date||'')||b.updatedAt-a.updatedAt)}
-function renderHist(){
+function renderHist(){ try{ return v21RenderHist(); }catch(e){ try{console.warn('renderHist',e)}catch(_){} return } }
+function v21RenderHist(){
  const host=document.getElementById('recList');document.getElementById('histCount').textContent=VIS().length+'건';
  if(!VIS().length){host.innerHTML='<div class="card empty"><b>저장된 점검이 없습니다</b>점검 탭에서 판정·사진·설명을 채운 뒤 ‘점검 저장’을 누르세요.</div>';}
  else{host.innerHTML='';
   VIS().forEach(r=>{const m=sum(r);
    const d=document.createElement('div');d.className='card rec';
    d.innerHTML=`<div class="r1"><span class="ct">${esc(r.center||'센터 미선택')}</span><span class="dt">${fmDate(r.date)}</span></div>
-    <div class="fc">${esc(r.facilities.join(', ')||'시설 미선택')} · ${esc(r.inspector||'')}</div>
+    <div class="fc">${esc((r.facilities||[]).join(', ')||'시설 미선택')} · ${esc(r.inspector||'')}</div>
     <div class="badges"><span class="bdg good">양호 ${m.g}</span>${m.w?`<span class="bdg watch">주의 ${m.w}</span>`:''}
     ${m.s?`<span class="bdg stop">중지 ${m.s}</span>`:''}${m.n?`<span class="bdg na">해당없음 ${m.n}</span>`:''}
     ${m.pic?`<span class="bdg pic">사진 ${m.pic}</span>`:''}${r.rev>1?`<span class="bdg lock">수정 ${r.rev-1}회</span>`:''}</div>
@@ -1712,7 +1718,7 @@ function reportInner(r){
  let h=`<img class="rlogo" src="${brandLogo('blue')}" alt="(주)바운스"><div class="rt">모험시설 분기점검 결과서</div><div class="rtrule"></div>`;
  h+=`<table><colgroup><col style="width:16%"><col style="width:34%"><col style="width:16%"><col style="width:34%"></colgroup>
   <tr><td class="hdr">점검일자</td><td class="c">${fmDate(r.date)}</td><td class="hdr">점검센터</td><td class="c">${esc(r.center||'')}</td></tr>
-  <tr><td class="hdr">점검시설</td><td class="c">${esc(r.facilities.join(', '))}</td><td class="hdr">점검자</td><td class="c">${esc(r.inspector||'')}</td></tr></table>`;
+  <tr><td class="hdr">점검시설</td><td class="c">${esc((r.facilities||[]).join(', '))}</td><td class="hdr">점검자</td><td class="c">${esc(r.inspector||'')}</td></tr></table>`;
  (CHECKS[r.checklistId]||CHECKS.full).sections.forEach(s=>{
   h+=`<div class="secttl">${esc(s.no)}. ${esc(s.name)}</div><table><colgroup><col style="width:9.5%"><col><col class="col4"><col class="col4"><col class="col4"><col class="col4"></colgroup>
    <tr><th>구분</th><th>내용</th><th>양 호</th><th>주의<br>관찰</th><th>운영<br>중지</th><th>해당<br>없음</th></tr>`;
@@ -1759,7 +1765,7 @@ function reportDoc(r){
 function reportText(r){
  const L=['모험시설 분기점검 결과서',''];
  L.push(['점검일자',fmDate(r.date),'점검센터',r.center||''].join('\t'));
- L.push(['점검시설',r.facilities.join(', '),'점검자',r.inspector||''].join('\t'));
+ L.push(['점검시설',(r.facilities||[]).join(', '),'점검자',r.inspector||''].join('\t'));
  (CHECKS[r.checklistId]||CHECKS.full).sections.forEach(s=>{L.push('',s.no+'. '+s.name);
   L.push(['구분','내용','양 호','주의 관찰','운영 중지','해당 없음'].join('\t'));
   s.items.forEach(it=>{const v=(r.items[it.code]||{}).v||'';
@@ -1881,7 +1887,7 @@ function renderAdmin(){
    saveMaster();renderAdmin();renderSections()};
   add.appendChild(ab);card.appendChild(add);host.appendChild(card)});
  const _ce=document.getElementById('admCenters'); if(_ce)_ce.value=SET.centers.join('\n');
- const _fa=document.getElementById('admFacs'); if(_fa)_fa.value=SET.facilities.join('\n');
+ const _fa=document.getElementById('admFacs'); if(_fa)_fa.value=(SET.facilities||[]).join('\n');
  const _in=document.getElementById('admInsps'); if(_in)_in.value=SET.inspectors.join('\n');
  const _pi=document.getElementById('admPin'); if(_pi)_pi.value=SET.pin||'0000';
  const _og=document.getElementById('admOrg'); if(_og)_og.value=SET.org||'(주)바운스';
@@ -3286,7 +3292,7 @@ function v17Style(){
 try{v17Style()}catch(e){}
 
 
-async function init(){setTimeout(function(){try{var g=document.getElementById('lgate');if(g&&!g.classList.contains('hide')){var b=document.getElementById('lgBody');if(!b||!b.children.length)v21Gate(false)}}catch(e){}},2200);try{if(typeof v21Seed==='function')v21Seed();if(typeof v21Lock==='function')v21Lock(true)}catch(e){}try{if(typeof v21Gate==='function')v21Gate(!CURRENT)}catch(e){}try{if(typeof v20AfterBoot==='function')setTimeout(v20AfterBoot,900)}catch(e){}
+async function init(){ setTimeout(function(){try{var g=document.getElementById('lgate');if(g&&!g.classList.contains('hide')){var b=document.getElementById('lgBody');if(!b||!b.children.length)v21Gate(false)}}catch(e){}},2200);try{if(typeof v21Seed==='function')v21Seed();if(typeof v21Lock==='function')v21Lock(true)}catch(e){}try{if(typeof v21Gate==='function')v21Gate(!CURRENT)}catch(e){}try{if(typeof v20AfterBoot==='function')setTimeout(v20AfterBoot,900)}catch(e){}
  document.getElementById('centerList').innerHTML=SET.centers.map(c=>`<option value="${c}">`).join('');
  const inspList=()=>SET.inspectors.map(i=>`<option value="${i}">`).join('');
  document.getElementById('inspList').innerHTML=inspList();
@@ -3849,9 +3855,9 @@ function expCsv(){ if(!RECS.length)return toast('내보낼 데이터가 없습�
  const rows=[['점검ID','점검일자','센터코드','센터','시설','점검자','항목코드','항목명','판정','지적여부','측정값','메모','사진수']];
  const NAME_=NAME();
  RECS.forEach(r=>{ITEMS().forEach(i=>{const it=r.items[i.code]||{};
-   rows.push([r.id,r.date,r.centerCode||'',r.center,r.facilities.join(' '),r.inspector,i.code,NAME_[i.code]||i.name,vNameFor(it.v)||'미판정',
+   rows.push([r.id,r.date,r.centerCode||'',r.center,(r.facilities||[]).join(' '),r.inspector,i.code,NAME_[i.code]||i.name,vNameFor(it.v)||'미판정',
     (it.v==='watch'||it.v==='stop')?'지적':'',it.num||'',nlines(it.note).join(' / '),(it.photos||[]).length])});
-  r.extras.forEach(e=>rows.push([r.id,r.date,r.centerCode||'',r.center,r.facilities.join(' '),r.inspector,'기타',e.title||'특이사항','','지적','',nlines(e.note).join(' / '),(e.photos||[]).length]))});
+  r.extras.forEach(e=>rows.push([r.id,r.date,r.centerCode||'',r.center,(r.facilities||[]).join(' '),r.inspector,'기타',e.title||'특이사항','','지적','',nlines(e.note).join(' / '),(e.photos||[]).length]))});
  dl('VAUNCE_점검항목_'+todayISO().replace(/-/g,'')+'.csv','\ufeff'+rows.map(r=>r.map(q).join(',')).join('\r\n'),'text/csv;charset=utf-8');
  toast('항목별 CSV를 내려받았습니다')}
 function impJson(file){const fr=new FileReader();fr.onload=async()=>{
@@ -4571,6 +4577,18 @@ function v21UserDel(i){
  modal('계정 삭제','<div class="v21lim">「'+esc(u.name||'')+' ('+esc(u.loginId||u.id)+')」 계정을 삭제합니다.<br><br>이 계정으로 로그인할 수 없게 됩니다.</div>',
   [['삭제',function(){ SET.users.splice(i,1); v21AfterChange(); toast('계정을 삭제했습니다') }],['취소',null]]);
 }
+
+
+/* ===== 최종 안전망: 초기화가 중간에 실패해도 로그인 화면은 반드시 표시 ===== */
+setTimeout(function(){
+ try{
+  var g=document.getElementById('lgate'), b=document.getElementById('lgBody');
+  if(!CURRENT){
+   if(!b||!b.children.length||!document.getElementById('v21Go')){ try{renderLogin()}catch(e){} }
+   try{v21Gate(true)}catch(e){}
+  }
+ }catch(e){}
+},1500);
 
 </script>
 </body>
