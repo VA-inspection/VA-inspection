@@ -414,6 +414,46 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%;}
 @keyframes mIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
 .card button:active,.tile:active,.lgtile:active,.v20btn:active{transform:scale(.982)}
 @media (prefers-reduced-motion:reduce){#splash *,#onb *,#modalRoot > *{animation:none!important}}
+
+/* ===== v21 상업화: 아이디 로그인 · 요금제 · 테넌트 ===== */
+html.v21lock,body.v21lock{overflow:hidden!important;height:100%;overscroll-behavior:none;touch-action:pan-y}
+.v21lg{display:flex;flex-direction:column;gap:11px}
+.v21lgLogo{text-align:center;margin:2px 0 12px}
+.v21lgLogo img{height:26px;width:auto;max-width:66%}
+.v21lgApp{font-size:11.5px;font-weight:800;color:var(--gray2);letter-spacing:.02em;margin-top:8px}
+.v21f{display:block}
+.v21f span{display:block;font-size:11.5px;font-weight:800;color:var(--gray);margin-bottom:5px}
+.v21f input{width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:11px;padding:13px 12px;font-family:inherit;font-size:16px;background:var(--card);color:var(--ink)}
+.v21f input:focus{outline:0;border-color:var(--navy)}
+.v21err{display:none;font-size:12px;font-weight:800;color:var(--pink-d);background:var(--pink-t);border-radius:10px;padding:10px 11px;line-height:1.45}
+.v21err.on{display:block}
+.v21go{width:100%;border:0;background:var(--navy);color:#fff;border-radius:12px;padding:15px;font-family:inherit;font-size:15px;font-weight:900;letter-spacing:-.01em}
+.v21go:active{transform:scale(.985)}
+.v21help{font-size:11px;color:var(--gray2);text-align:center;line-height:1.5;margin-top:2px}
+.v21shake{animation:v21sh .4s}
+@keyframes v21sh{0%,100%{transform:none}20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(3px)}}
+.v21card{margin-top:12px}
+.v21plan{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 10px}
+.v21pill{border:1px solid var(--line);background:var(--card);border-radius:99px;padding:7px 11px;font-size:11.5px;font-weight:800;color:var(--ink)}
+.v21pill b{font-family:var(--fd);font-style:italic;font-size:13px;color:var(--navy);margin-left:3px}
+.v21pill.warn{border-color:var(--pink);background:var(--pink-t);color:var(--pink-d)}
+.v21pill.warn b{color:var(--pink-d)}
+.v21tnt{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:8px;background:var(--card)}
+.v21tnt .h{display:flex;align-items:center;gap:7px;margin-bottom:5px}
+.v21tnt .h b{font-size:13.5px;font-weight:900}
+.v21tnt .h code{font-family:var(--fd);font-style:italic;font-size:11.5px;color:var(--navy);background:var(--navy-t);border-radius:6px;padding:2px 7px}
+.v21tnt .h .st{margin-left:auto;font-size:10px;font-weight:800;color:var(--mint-d);background:var(--mint-t);border-radius:99px;padding:3px 8px}
+.v21tnt .h .st.off{color:var(--gray);background:var(--line2)}
+.v21tnt .m{font-size:11px;color:var(--gray);line-height:1.55;margin-bottom:8px}
+.v21tnt .b{display:flex;gap:6px;flex-wrap:wrap}
+.v21tnt .b button{border:1px solid var(--line);background:var(--card);border-radius:9px;padding:8px 11px;font-family:inherit;font-size:11.5px;font-weight:800;color:var(--ink)}
+.v21lim{font-size:12.5px;color:var(--gray);line-height:1.6}
+.v21lim b{color:var(--ink)}
+#onb{background:linear-gradient(165deg,#1E2A59,#141C3D 58%,#0B1023)!important;justify-content:space-between;overflow:hidden;overscroll-behavior:none}
+#onb .obtop{margin:auto 0 0;text-align:center;color:#fff;padding:0 24px 30px}
+#onb .obtop img{height:24px;width:auto;max-width:60%}
+#onb .obtop .n{font-size:12px;font-weight:800;color:rgba(255,255,255,.72);margin-top:11px;letter-spacing:-.01em}
+#onb .obbox{border-radius:22px 22px 0 0!important;box-shadow:0 -18px 40px -24px rgba(0,0,0,.6)}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
 </head>
@@ -1005,7 +1045,10 @@ const NAV=[['check','점검','<path d="M3 4h14M3 9h14M3 14h9"/>'],
            ['admin','관리','<circle cx="11" cy="11" r="3.2"/><path d="M11 3v2M11 17v2M3 11h2M17 11h2M5.6 5.6l1.4 1.4M15 15l1.4 1.4M16.4 5.6L15 7M7 15l-1.4 1.4"/>']];
 
 /* ---------- 저장소 ---------- */
-const LS='vx_recs_v2', LSD='vx_draft_v2', LSM='vx_master_v2', LSS='vx_settings_v2';
+var TENANTCODE=(function(){try{return (localStorage.getItem('vx_tenant_v1')||'bounce').toLowerCase()}catch(e){return 'bounce'}})();
+function nk(k){return TENANTCODE==='bounce'?k:(k+'@'+TENANTCODE)}
+function nkFor(code,k){return String(code||'').toLowerCase()==='bounce'?k:(k+'@'+String(code||'').toLowerCase())}
+const LS=nk('vx_recs_v2'), LSD=nk('vx_draft_v2'), LSM=nk('vx_master_v2'), LSS=nk('vx_settings_v2');
 let mode='idb';
 function openDB(){return new Promise((res,rej)=>{const r=indexedDB.open('vaunce_inspect',1);
  r.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('recs'))d.createObjectStore('recs',{keyPath:'id'});};
@@ -1040,12 +1083,12 @@ if(!SET.org)SET.org='(주)바운스';
 SET.users.forEach(u=>{if(u.id==='u2'&&/외부 점검위원/.test(u.name||''))u.name='정지문 대표 인스펙터';
  if(u.id==='u2'){u.vendor='어드벤처 인사이트';u.cert='ACCT Level 2 Professional Inspector'}
  if(!u.assign)u.assign=[];});
-const ROLES=DEFAULT_ROLES, LSM5='vx_checks_v5', LSU='vx_user_v5';
+const ROLES=DEFAULT_ROLES, LSM5=nk('vx_checks_v5'), LSU=nk('vx_user_v5');
 let CHECKS=jget(LSM5,null)||buildDefaultChecks();
 if(!CHECKS.full)CHECKS=buildDefaultChecks();
 (['daily','weekly','monthly','ext','abw','edge','edgeM','ai_line'].concat(Object.keys(buildAI()))).forEach(k=>{if(!CHECKS[k])CHECKS[k]=buildDefaultChecks()[k]});
 Object.keys(CHECKS).forEach(k=>{if(!CHECKS[k]||!CHECKS[k].sections)delete CHECKS[k]});
-let CURRENT=(function(){try{var c=jget(LSU,null);return (c&&c._keep)?c:null}catch(e){return null}})(), lgPick=null, lgFilter='all', lgQuery='';
+let CURRENT=(function(){try{var x=JSON.parse(localStorage.getItem('vx_session_v2')||'null');if(x&&x.user&&x.tenant===TENANTCODE&&x.keep)return x.user;return null}catch(e){return null}})(), lgPick=null, lgFilter='all', lgQuery='';
 const activeUser=()=>CURRENT||null;
 const role=()=>{const u=activeUser();return ROLES.find(r=>r.id===(u&&u.role))||ROLES[1]};
 function canSee(r){const u=activeUser();if(!u)return true;const R=role();
@@ -1799,7 +1842,7 @@ function renderAdmin(){
  const _og=document.getElementById('admOrg'); if(_og)_og.value=SET.org||'(주)바운스';
  const _as=document.getElementById('admSave'); if(_as)_as.onclick=()=>document.getElementById('btnSave').click();
  v14RenderCenters();v14RenderInsp();v14RenderFacs();v16RenderUsers();v17Render();
- if(document.getElementById('admUsers'))document.getElementById('admUsers').value=SET.users.map(u=>[u.name,(ROLES.find(r=>r.id===u.role)?u.role:'site'),u.pin,(u.centers||[]).join(',')].join('|')).join('\n');
+ if(document.getElementById('admUsers'))document.getElementById('admUsers').value=SET.users.map(function(u){return [u.name,(u.loginId||u.id||''),(ROLES.find(function(r){return r.id===u.role})?u.role:'site'),(u.password||u.pin||''),(u.centers||[]).join(',')].join('|')}).join('\n');
  const bytes_=new Blob([JSON.stringify(RECS)]).size;
  document.getElementById('admInfo').innerHTML=`
   <div class="kv"><span class="k"><b>저장된 점검</b><em>이 기기 기준</em></span><span class="a"><span class="mini">${RECS.length}건</span></span></div>
@@ -1814,7 +1857,7 @@ function renderAdmin(){
   <div class="kv"><span class="k"><b>점검 데이터 구조</b><em>점검자·수정자·개정번호 기록 (다인 병합 대비)</em></span></div>`}
 function saveMaster(){jset(LSM,MASTER);CHECKS.full={name:'표준 분기점검',sections:MASTER.sections};jset(LSM5,CHECKS);
  ITEMS().forEach(i=>{if(!cur.items[i.code])cur.items[i.code]={v:null,num:'',note:'',photos:[]}});}
-function renderAdminAll(){renderAdmin();renderCheck();try{if(typeof v20BrandMount==='function')v20BrandMount()}catch(e){}}
+function renderAdminAll(){renderAdmin();renderCheck();try{if(typeof v20BrandMount==='function')v20BrandMount();if(typeof v21Mount==='function')v21Mount()}catch(e){}}
 
 /* ---------- 사용자 · 역할 ---------- */
 /* __LOGIN_V9__ */
@@ -2523,7 +2566,7 @@ function v14AddCenter(name){
  const v=String(name==null?'':name).trim(); if(!v)return toast('이름을 입력하세요');
  const all=(SET.centers||[]).concat((SET.extSites||[]).map(function(x){return x.name}));
  if(all.indexOf(v)>=0){toast('이미 있는 이름입니다');return false}
- (SET.centers=SET.centers||[]).push(v);
+ if(!v21CenterGuard())return;SET.centers.push(v);
  if(!SET.facByCenter)SET.facByCenter={};
  if(SET.facByCenter[v]===undefined)SET.facByCenter[v]=(SET.facilities||[]).map(function(n){return {n:n,on:true}});
  jset(LSS,SET); v14RenderCenters(); renderFacAdmin(); renderCheck(); return true;
@@ -2902,7 +2945,7 @@ function v16ExtForm(){
   const v=String(o.name||'').trim(); if(!v)return toast('현장 이름을 입력하세요');
   if(v16Combined().some(function(x){return x.n===v}))return toast('이미 있는 이름입니다');
   SET.extSites=SET.extSites||[];
-  SET.extSites.push({name:v,client:String(o.client||'').trim(),ab:String(o.ab)==='1',
+  if(!v21CenterGuard())return;SET.extSites.push({name:v,client:String(o.client||'').trim(),ab:String(o.ab)==='1',
    daily:o.daily||null,monthly:o.monthly||null,assignee:''});
   SET.centerCode=SET.centerCode||{};
   if(!SET.centerCode[v])SET.centerCode[v]='X'+String((SET.extSites||[]).length).padStart(2,'0');
@@ -3197,7 +3240,7 @@ function v17Style(){
 try{v17Style()}catch(e){}
 
 
-async function init(){try{if(typeof v20AfterBoot==='function')setTimeout(v20AfterBoot,900)}catch(e){}
+async function init(){try{if(typeof v21Seed==='function')v21Seed();if(typeof v21Lock==='function')v21Lock(true)}catch(e){}try{if(typeof v20AfterBoot==='function')setTimeout(v20AfterBoot,900)}catch(e){}
  document.getElementById('centerList').innerHTML=SET.centers.map(c=>`<option value="${c}">`).join('');
  const inspList=()=>SET.inspectors.map(i=>`<option value="${i}">`).join('');
  document.getElementById('inspList').innerHTML=inspList();
@@ -3220,11 +3263,7 @@ async function init(){try{if(typeof v20AfterBoot==='function')setTimeout(v20Afte
    const _o1=document.getElementById('admOrg'); if(_o1)SET.org=_o1.value.trim()||SET.org||'(주)바운스';
    if(typeof v14SyncInspectors==='function')v14SyncInspectors();
    SET.pin=(document.getElementById('admPin').value||'0000').trim()||'0000';
-   const au=document.getElementById('admUsers');
-   if(au){SET.users=au.value.split('\n').map(l=>l.trim()).filter(Boolean).map((l,i)=>{
-     const p=l.split('|').map(x=>x.trim());
-     return {id:'u'+(i+1),name:p[0]||('사용자'+(i+1)),role:(['int','ext','site'].includes(p[1])?p[1]:'site'),
-      pin:(p[2]||'0000'),centers:(p[3]?p[3].split(',').map(x=>x.trim()).filter(Boolean):[])}});jset(LSS,SET)}
+   const au=document.getElementById('admUsers'); if(au){SET.users=au.value.split('\n').map(function(l){return l.trim()}).filter(Boolean).map(function(l,i){return v21ParseUser(l.split('|').map(function(x){return x.trim()}),i)}).slice(0,v21MaxUsers());jset(LSS,SET)}
    jset(LSS,SET);document.getElementById('centerList').innerHTML=SET.centers.map(c=>`<option value="${c}">`).join('');
    document.getElementById('inspList').innerHTML=SET.inspectors.map(i=>`<option value="${i}">`).join('');
    saveMaster();renderCheck();renderAdmin();renderFacAdmin();renderReport();toast('설정을 저장했습니다');return}
@@ -3524,7 +3563,7 @@ function renderSched(){
     const n=(document.getElementById('v7NewSite').value||'').trim(), c=(document.getElementById('v7NewClient').value||'').trim();
     if(!n) return toast('현장 이름을 입력하세요');
     if(v7Sites().some(x=>x.name===n)) return toast('이미 있는 현장입니다');
-    SET.extSites.push({name:n, client:c, ab:false, daily:null, assignee:''});
+    if(!v21CenterGuard())return;SET.extSites.push({name:n, client:c, ab:false, daily:null, assignee:''});
     jset(LSS,SET); v7RefreshCenters(); renderSched(); toast('외부 현장을 추가했습니다: '+n);
   };
   const nb=document.getElementById('v7NotifOn');
@@ -3884,6 +3923,7 @@ function v20AfterBoot(){
  setTimeout(function(){
   var sp=document.getElementById('splash');
   if(sp){sp.classList.add('off');setTimeout(function(){try{sp.remove()}catch(e){}},520)}
+  try{ if(!document.getElementById('onb')) v21Lock(false) }catch(e){}
   try{v20Account();v20StripCapture()}catch(e){}
   if(!CURRENT)setTimeout(v20Onboard,320);
  },1250);
@@ -3928,12 +3968,13 @@ function v20Onboard(){
          ['STEP 2','사진은 촬영도, 앨범에서도','＋ 사진 버튼을 누르면 카메라와 사진 보관함 중에서 고를 수 있습니다. 이미 찍어둔 사진을 그대로 올리세요.'],
          ['STEP 3','결과서는 바로 전송','결과서 탭에서 저장 버튼을 누르면 인쇄·PDF, 공유(카카오톡·메일), 이미지 저장을 고를 수 있습니다.']];
  onbIdx=0;
- function done(){try{localStorage.setItem('vx_onboard_v1','1')}catch(e){}var h=document.getElementById('onb');if(h)h.remove()}
+ function done(){try{localStorage.setItem('vx_onboard_v1','1')}catch(e){}var h=document.getElementById('onb');if(h)h.remove();try{v21Lock(false)}catch(e){}}
  function draw(){
+  try{v21Lock(true)}catch(e){}
   var host=document.getElementById('onb');
   if(!host){host=document.createElement('div');host.id='onb';document.body.appendChild(host)}
   var st=SL[onbIdx];
-  host.innerHTML='<div class="obbox"><div class="obn">'+st[0]+'</div><h3>'+st[1]+'</h3><p>'+st[2]+'</p>'
+  host.innerHTML='<div class="obtop"><img src="'+brandLogo('blue')+'" alt=""><div class="n">'+esc(BRAND().name)+'</div></div><div class="obbox"><div class="obn">'+st[0]+'</div><h3>'+st[1]+'</h3><p>'+st[2]+'</p>'
    +'<div class="obdots">'+SL.map(function(_,i){return '<i class="'+(i===onbIdx?'on':'')+'"></i>'}).join('')+'</div>'
    +'<button type="button" class="obgo">'+(onbIdx<SL.length-1?'다음':'시작하기')+'</button>'
    +'<button type="button" class="obskip">건너뛰기</button></div>';
@@ -4059,6 +4100,239 @@ async function v20ReportPng(r){
   }catch(err){}
  },true);
 });
+
+
+/* ===================== v21 : 회사코드 로그인 · 요금제 · 테넌트(총판) ===================== */
+function v21Lock(on){
+ try{ document.documentElement.classList[on?'add':'remove']('v21lock');
+      document.body.classList[on?'add':'remove']('v21lock');
+ }catch(e){}
+}
+function v21Tenants(){ try{ return JSON.parse(localStorage.getItem('vx_tenants_v1')||'{}')||{} }catch(e){ return {} } }
+function v21TenantRec(code){ return v21Tenants()[String(code||'').toLowerCase()]||null }
+function v21TenantSave(t){ try{ localStorage.setItem('vx_tenants_v1',JSON.stringify(t)) }catch(e){} }
+function v21Plan(){ var t=v21TenantRec(TENANTCODE); if(TENANTCODE==='vendor')return {sites:99,users:99,until:'2030-12-31'}; return (t&&t.plan)||{} }
+function v21MaxUsers(){ var p=v21Plan(); var m=parseInt(p.users,10); return (m&&m>0)?m:999 }
+function v21SiteCount(){ try{ return ((SET.centers||[]).length)+((SET.extSites||[]).length) }catch(e){ return 0 } }
+function v21Seed(){
+ try{
+  var t=v21Tenants(), ch=false;
+  if(!t.bounce){ t.bounce={code:'bounce',name:'(주)바운스',plan:{sites:8,users:30,until:'2027-12-31'},active:true,note:'기존 데이터 · 기본 테넌트',createdAt:Date.now()}; ch=true }
+  if(!t.vendor){ t.vendor={code:'vendor',name:'총판 · 업체 발급 콘솔',plan:{sites:99,users:99,until:'2030-12-31'},active:true,vendor:true,note:'업체 발급용',createdAt:Date.now()}; ch=true }
+  if(ch)v21TenantSave(t);
+ }catch(e){}
+ try{ if(!localStorage.getItem('vx_vendor_v1')) localStorage.setItem('vx_vendor_v1',JSON.stringify({loginId:'vendor',password:'9999',name:'총판 관리자'})); }catch(e){}
+}
+function v21Norm(u,i){ u=u||{};
+ return {id:u.id||('u'+(i+1)),name:u.name||('사용자'+(i+1)),
+  role:(['int','ext','site'].indexOf(u.role)>=0?u.role:'site'),
+  loginId:(u.loginId||u.userId||({u1:'admin',u2:'inspector',u3:'site'})[u.id]||u.id||('u'+(i+1))).toString().toLowerCase(),
+  password:(u.password||u.pin||'').toString(), pin:(u.pin||u.password||'').toString(),
+  centers:u.centers||[], vendor:!!u.vendor, title:u.title||''};
+}
+function v21UsersOf(code){
+ try{ var raw=jget(nkFor(code,'vx_settings_v2'),null); var us=(raw&&raw.users)||null;
+      if(us&&us.length)return us.map(v21Norm); }catch(e){}
+ if(String(code).toLowerCase()==='bounce')return (DEFAULT_USERS||[]).map(v21Norm);
+ return [];
+}
+function v21ParseUser(p,i){
+ var R=['int','ext','site'];
+ if(R.indexOf((p[1]||'').trim())>=0){                       /* 구형식: 이름|역할|핀|센터 */
+  return {id:'u'+(i+1),name:p[0]||('사용자'+(i+1)),role:p[1],loginId:(({0:'admin',1:'inspector',2:'site'})[i]||('u'+(i+1))),
+   password:(p[2]||'1234'),pin:(p[2]||'1234'),centers:(p[3]?p[3].split(',').map(function(x){return x.trim()}).filter(Boolean):[])};
+ }
+ /* 신형식: 이름|아이디|역할|비밀번호|담당센터 */
+ return {id:'u'+(i+1),name:p[0]||('사용자'+(i+1)),loginId:(p[1]||('u'+(i+1))).toLowerCase(),role:(R.indexOf(p[2])>=0?p[2]:'site'),
+  password:(p[3]||'1234'),pin:(p[3]||'1234'),centers:(p[4]?p[4].split(',').map(function(x){return x.trim()}).filter(Boolean):[])};
+}
+function v21Complete(user,keep){return {id:user.id,name:user.name,role:user.role,loginId:user.loginId,centers:user.centers||[],vendor:!!user.vendor}}
+function v21Enter(code,user,keep){
+ try{
+  localStorage.setItem('vx_tenant_v1',String(code).toLowerCase());
+  localStorage.setItem('vx_session_v2',JSON.stringify({tenant:String(code).toLowerCase(),user:v21Complete(user,keep),keep:!!keep,at:Date.now()}));
+  localStorage.setItem('vx_last_user',user.id);
+ }catch(e){}
+ location.reload();
+}
+function v21Login(){
+ v21Seed();
+ var code=(document.getElementById('v21Code').value||'').trim().toLowerCase();
+ var id=(document.getElementById('v21Id').value||'').trim().toLowerCase();
+ var pw=(document.getElementById('v21Pw').value||'');
+ var keep=!!(document.getElementById('v21Keep')||{}).checked;
+ var eb=document.getElementById('v21Err');
+ function bad(m){
+  if(eb){eb.textContent=m;eb.classList.add('on')}
+  var b=document.getElementById('lgBody'); if(b){b.classList.add('v21shake');setTimeout(function(){b.classList.remove('v21shake')},420)}
+  return false;
+ }
+ if(!code)return bad('회사 코드를 입력하세요');
+ if(!id)return bad('아이디를 입력하세요');
+ if(!pw)return bad('비밀번호를 입력하세요');
+ if(code==='vendor'){
+  var v={}; try{v=JSON.parse(localStorage.getItem('vx_vendor_v1')||'{}')}catch(e){}
+  if(String(v.loginId||'vendor').toLowerCase()===id && String(v.password||'9999')===String(pw))
+   return v21Enter('vendor',{id:'vendor',name:v.name||'총판 관리자',role:'int',loginId:id,centers:[],vendor:true},keep);
+  return bad('총판 아이디 또는 비밀번호가 맞지 않습니다');
+ }
+ var rec=v21TenantRec(code);
+ if(!rec)return bad('등록되지 않은 회사 코드입니다 — 계약 시 발급된 코드를 확인하세요');
+ if(rec.active===false)return bad('사용이 중지된 회사 코드입니다 — 담당자에게 문의하세요');
+ var hit=null;
+ v21UsersOf(code).forEach(function(u){
+  if(hit)return;
+  var ids=[u.loginId,u.id,String(u.name||'').toLowerCase().replace(/\s+/g,'')];
+  if(ids.indexOf(id)>=0 && String(u.password)===String(pw)) hit=u;
+ });
+ if(!hit)return bad('아이디 또는 비밀번호가 맞지 않습니다');
+ v21Enter(code,hit,keep);
+}
+function renderLogin(){
+ var body=document.getElementById('lgBody'); if(!body)return;
+ ['lgSteps','lgPinRow','lgBack','lgGo'].forEach(function(id){var e=document.getElementById(id); if(e)e.style.display='none'});
+ var ttl=document.querySelector('.lgbox h2, .lgbox .lgt, .lgbox h1');
+ if(ttl&&/시작|누구/.test(ttl.textContent||''))ttl.textContent='로그인';
+ var last=''; try{last=localStorage.getItem('vx_tenant_v1')||''}catch(e){}
+ var BR=BRAND();
+ body.innerHTML='<div class="v21lg">'
+  +'<div class="v21lgLogo"><img src="'+brandLogo('blue')+'" alt=""><div class="v21lgApp">'+esc(BR.name)+' · '+esc(BR.app)+'</div></div>'
+  +'<label class="v21f"><span>회사 코드</span><input id="v21Code" type="text" autocapitalize="none" autocomplete="organization" placeholder="회사 코드" value="'+esc(last==='vendor'?'':last)+'"></label>'
+  +'<label class="v21f"><span>아이디</span><input id="v21Id" type="text" autocapitalize="none" autocomplete="username" placeholder="아이디"></label>'
+  +'<label class="v21f"><span>비밀번호</span><input id="v21Pw" type="password" autocomplete="current-password" placeholder="비밀번호"></label>'
+  +'<div id="v21Err" class="v21err"></div>'
+  +'<label class="lgkeep"><input type="checkbox" id="v21Keep"><span>이 기기에서 로그인 유지<br>(앱을 열 때 로그인 화면을 건너뜁니다)</span></label>'
+  +'<button type="button" class="v21go" id="v21Go">로그인</button>'
+  +'<div class="v21help">회사 코드는 계약 시 발급됩니다.<br>분실 시 담당자에게 문의하세요.</div>'
+  +'</div>';
+ document.getElementById('v21Go').onclick=v21Login;
+ ['v21Code','v21Id','v21Pw'].forEach(function(id){
+  var e=document.getElementById(id); if(!e)return;
+  e.onkeydown=function(ev){ if(ev.key==='Enter')v21Login() };
+ });
+ var c=document.getElementById('v21Code');
+ (c&&!c.value?c:document.getElementById('v21Id')).focus();
+}
+/* --- 요금제 한도 --- */
+function v21Limit(kind,n,max){
+ modal(kind+' 한도 초과',
+  '<div class="v21lim">현재 플랜의 <b>'+kind+' 한도는 '+max+'개</b>입니다. 지금 <b>'+n+'개</b>를 사용 중이라 더 이상 추가할 수 없습니다.'
+  +'<br><br>요금제를 올리면 현장을 추가할 수 있습니다. 담당자에게 문의하세요.</div>',[['확인',null]]);
+}
+function v21CenterGuard(){
+ var p=v21Plan(), max=parseInt(p.sites,10);
+ if(!max||max<=0)return true;
+ var n=v21SiteCount();
+ if(n>=max){ v21Limit('현장(센터)',n,max); return false }
+ return true;
+}
+/* --- 관리탭: 요금제 카드 + 총판 콘솔 --- */
+function v21Mount(){
+ var a=document.getElementById('admCenters'); if(!a)return;
+ var host=a.closest('.card')||a.parentElement; if(!host||!host.parentElement)return;
+ if(!document.getElementById('v21PlanCard')){
+  var p=v21Plan(), n=v21SiteCount();
+  var smax=parseInt(p.sites,10)||0, umax=parseInt(p.users,10)||0;
+  var nu=(SET.users||[]).length;
+  var d=document.createElement('div'); d.id='v21PlanCard'; d.className=host.className;
+  var left=(smax?Math.max(0,smax-n):0);
+  d.innerHTML='<div class="v20ttl">요금제 · 사용량</div>'
+   +'<div class="v21plan">'
+   +'<span class="v21pill'+(smax&&n>=smax?' warn':'')+'">현장 <b>'+(smax?(n+'/'+smax):n)+'</b></span>'
+   +'<span class="v21pill'+(umax&&nu>=umax?' warn':'')+'">계정 <b>'+(umax?(nu+'/'+umax):nu)+'</b></span>'
+   +'<span class="v21pill">남은 현장 <b>'+left+'</b></span>'
+   +'<span class="v21pill">만료 <b>'+esc(p.until||'—')+'</b></span>'
+   +'</div>'
+   +'<div class="v20hint">'+(smax?('현장(센터)은 플랜 한도 '+smax+'개까지 추가할 수 있습니다. 한도에 도달하면 담당자에게 요금제 상향을 요청하세요.'):'현장 수 제한이 없는 플랜입니다.')+'</div>';
+  host.parentElement.insertBefore(d, host.nextSibling);
+ }
+ var vd=(CURRENT&&CURRENT.vendor)||TENANTCODE==='vendor';
+ if(vd&&!document.getElementById('v21TntCard')){
+  var t=v21Tenants();
+  var c=document.createElement('div'); c.id='v21TntCard'; c.className=host.className;
+  c.innerHTML='<div class="v20ttl">총판 콘솔 · 업체 발급<span class="v20tag">총판 전용</span></div>'
+   +'<div class="v20hint">업체별 회사 코드를 발급하고, 플랜(현장 수·계정 수·만료일)을 관리합니다.</div>'
+   +'<div id="v21TntList">'+Object.keys(t).map(function(k){
+      var x=t[k];
+      return '<div class="v21tnt" data-code="'+esc(k)+'"><div class="h"><b>'+esc(x.name||k)+'</b><code>'+esc(k)+'</code>'
+       +'<span class="st'+((x.active===false)?' off':'')+'">'+((x.active===false)?'중지':'사용중')+'</span></div>'
+       +'<div class="m">현장 '+((x.plan&&x.plan.sites)||0)+'개 · 계정 '+((x.plan&&x.plan.users)||0)+'개 · 만료 '+esc((x.plan&&x.plan.until)||'—')+((x.note)?(' · '+esc(x.note)):'')+'</div>'
+       +'<div class="b"><button type="button" data-act="edit">플랜 수정</button><button type="button" data-act="go">이 업체로 접속</button></div></div>';
+     }).join('')+'</div>'
+   +'<div class="v20row2"><button type="button" class="v20btn" id="v21Issue">＋ 새 업체 발급</button>'
+   +'<button type="button" class="v20btn ghost" id="v21VendorPw">총판 비밀번호 변경</button></div>';
+  host.parentElement.insertBefore(c, host.nextSibling);
+  c.querySelectorAll('.v21tnt').forEach(function(card){
+   var code=card.dataset.code;
+   card.querySelectorAll('button').forEach(function(b){
+    b.onclick=function(){
+     if(b.dataset.act==='go'){ try{localStorage.setItem('vx_tenant_v1',code);localStorage.removeItem('vx_session_v2')}catch(e){}; location.reload(); return }
+     v21EditTenant(code);
+    };
+   });
+  });
+  c.querySelector('#v21Issue').onclick=v21IssueForm;
+  c.querySelector('#v21VendorPw').onclick=function(){
+   modal('총판 비밀번호 변경','<label class="v21f"><span>새 총판 비밀번호</span><input id="v21NewVpw" type="text"></label>',[['저장',function(){
+    var v=(document.getElementById('v21NewVpw').value||'').trim(); if(!v)return toast('값을 입력하세요');
+    try{var o=JSON.parse(localStorage.getItem('vx_vendor_v1')||'{}');o.password=v;localStorage.setItem('vx_vendor_v1',JSON.stringify(o))}catch(e){}
+    toast('총판 비밀번호를 바꿨습니다')}],['닫기',null]]);
+  };
+ }
+}
+function v21EditTenant(code){
+ var t=v21Tenants(), x=t[code]||{}; var p=x.plan||{};
+ modal('플랜 수정 · '+esc(x.name||code),
+  '<label class="v21f"><span>업체명</span><input id="v21EName" type="text" value="'+esc(x.name||'')+'"></label>'
+  +'<div style="height:9px"></div>'
+  +'<label class="v21f"><span>현장(센터) 허용 수</span><input id="v21ESites" type="number" inputmode="numeric" value="'+((p.sites)||3)+'"></label>'
+  +'<div style="height:9px"></div>'
+  +'<label class="v21f"><span>계정 허용 수</span><input id="v21EUsers" type="number" inputmode="numeric" value="'+((p.users)||10)+'"></label>'
+  +'<div style="height:9px"></div>'
+  +'<label class="v21f"><span>계약 만료일</span><input id="v21EUntil" type="date" value="'+esc(p.until||'')+'"></label>'
+  +'<div style="height:9px"></div>'
+  +'<label class="v21f"><span>상태</span><select id="v21EAct" style="width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:11px;padding:13px 12px;font-family:inherit;font-size:16px">'
+  +'<option value="1"'+((x.active===false)?'':' selected')+'>사용중</option><option value="0"'+((x.active===false)?' selected':'')+'>중지</option></select></label>',
+  [['저장',function(){
+    var o=document.getElementById('v21EUntil'), s=document.getElementById('v21ESites'), u=document.getElementById('v21EUsers'), n=document.getElementById('v21EName'), ac=document.getElementById('v21EAct');
+    x.name=(n.value||'').trim()||x.name; x.plan={sites:parseInt(s.value,10)||0,users:parseInt(u.value,10)||0,until:(o.value||'').trim()}; x.active=(ac.value==='1');
+    t[code]=x; v21TenantSave(t); toast('저장했습니다'); setTimeout(function(){location.reload()},500);
+  }],['닫기',null]]);
+}
+function v21IssueForm(){
+ modal('새 업체 발급',
+  '<div class="v20hint">업체에 전달할 접속 정보를 만듭니다. 이 기기에서 코드별로 데이터가 분리됩니다.</div>'
+  +'<label class="v21f"><span>회사 코드 (영문·숫자)</span><input id="v21ICode" type="text" autocapitalize="none" placeholder="예) skyline"></label><div style="height:9px"></div>'
+  +'<label class="v21f"><span>업체명</span><input id="v21IName" type="text" placeholder="예) 스카이라인 어드벤처"></label><div style="height:9px"></div>'
+  +'<label class="v21f"><span>관리자 아이디</span><input id="v21IId" type="text" autocapitalize="none" value="admin"></label><div style="height:9px"></div>'
+  +'<label class="v21f"><span>관리자 비밀번호</span><input id="v21IPw" type="text" value="1234"></label><div style="height:9px"></div>'
+  +'<label class="v21f"><span>현장 허용 수</span><input id="v21ISites" type="number" inputmode="numeric" value="3"></label><div style="height:9px"></div>'
+  +'<label class="v21f"><span>계정 허용 수</span><input id="v21IUsers" type="number" inputmode="numeric" value="10"></label><div style="height:9px"></div>'
+  +'<label class="v21f"><span>계약 만료일</span><input id="v21IUntil" type="date" value="2027-12-31"></label>',
+  [['발급',function(){
+    var code=(document.getElementById('v21ICode').value||'').trim().toLowerCase().replace(/[^a-z0-9_-]/g,'');
+    var nm=(document.getElementById('v21IName').value||'').trim();
+    if(!code)return toast('회사 코드를 입력하세요 (영문·숫자)');
+    if(!nm)return toast('업체명을 입력하세요');
+    var t=v21Tenants(); if(t[code])return toast('이미 사용 중인 코드입니다');
+    var g=function(id,d){var e=document.getElementById(id);return e?(e.value||d):d};
+    t[code]={code:code,name:nm,plan:{sites:parseInt(g('v21ISites','3'),10)||3,users:parseInt(g('v21IUsers','10'),10)||10,until:g('v21IUntil','2027-12-31')},active:true,note:'신규 발급',createdAt:Date.now()};
+    v21TenantSave(t);
+    /* 표준 설정 · 양식 시드 */
+    var base={}; try{ base=JSON.parse(JSON.stringify(SET)) }catch(e){ base={} }
+    base.centers=[]; base.extSites=[]; base.abCenters=[]; base.centerCode={}; base.facByCenter={}; base.storeChecks={};
+    base.inspectorBook=[]; base.inspectors=[]; base.siteAssign={}; base.org=nm; base.brand={name:nm,app:'모험시설 점검'};
+    base.users=[{id:'u1',name:'관리자',role:'int',loginId:(g('v21IId','admin')+'').toLowerCase()||'admin',password:g('v21IPw','1234'),pin:g('v21IPw','1234'),centers:[]}];
+    try{
+     localStorage.setItem(nkFor(code,'vx_settings_v2'),JSON.stringify(base));
+     var m=jget(LSM,null); if(m)localStorage.setItem(nkFor(code,'vx_master_v2'),JSON.stringify(m));
+     var ck=jget(LSM5,null); if(ck)localStorage.setItem(nkFor(code,'vx_checks_v5'),JSON.stringify(ck));
+    }catch(e){}
+    modal('발급 완료',
+     '<div class="v21lim">업체에 아래 정보를 전달하세요.<br><br>회사 코드 <b>'+esc(code)+'</b><br>아이디 <b>'+esc(g('v21IId','admin'))+'</b><br>비밀번호 <b>'+esc(g('v21IPw','1234'))+'</b><br><br>주소: <b>'+esc(location.origin+location.pathname)+'</b></div>',
+     [['확인',function(){location.reload()}]]);
+  }],['닫기',null]]);
+}
 
 </script>
 </body>

@@ -1,4 +1,4 @@
-const C='vaunce-check-v21';
+const C='vaunce-check-v22';
 const ASSETS=['./','./index.html','./manifest.json','./icons/icon-180.png','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(ASSETS).catch(()=>{})));});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{const ks=await caches.keys();await Promise.all(ks.map(k=>k===C?null:caches.delete(k)));await self.clients.claim();})());});
